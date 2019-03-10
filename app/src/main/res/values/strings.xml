@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">MobilniProekt</string>
+    <string name="title_details">Title</string>
 </resources>
