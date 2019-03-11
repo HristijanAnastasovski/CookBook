@@ -12,6 +12,7 @@ import com.example.mobilniproekt.R;
 import com.example.mobilniproekt.RecipeDetailsActivity;
 import com.example.mobilniproekt.adapters.viewholder.CardItemViewHolder;
 import com.example.mobilniproekt.model.Recipe;
+import com.example.mobilniproekt.room.RecipeDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,10 +20,12 @@ import java.util.List;
 public class CardViewAdapter extends RecyclerView.Adapter<CardItemViewHolder>{
     private List<Recipe> data;
     private Context context;
+    private RecipeDatabase database;
 
-    public CardViewAdapter(Context context) {
+    public CardViewAdapter(Context context, RecipeDatabase database) {
         this.data = new ArrayList<>();
         this.context = context;
+        this.database=database;
     }
 
     @NonNull
@@ -39,7 +42,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardItemViewHolder>{
     public void onBindViewHolder(@NonNull CardItemViewHolder cardItemViewHolder, int i) {
 
         Recipe entity = data.get(i);
-        cardItemViewHolder.bind(entity);
+        cardItemViewHolder.bind(entity, database, data.size());
         cardItemViewHolder.getParent().setOnClickListener(v-> {
             Intent intent = new Intent(context, RecipeDetailsActivity.class);
             intent.putExtra(context.getString(R.string.title_details), entity.getTitle());

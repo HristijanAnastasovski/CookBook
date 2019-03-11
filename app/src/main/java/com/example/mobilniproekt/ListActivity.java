@@ -1,6 +1,7 @@
 package com.example.mobilniproekt;
 
 import android.app.ProgressDialog;
+import android.arch.persistence.room.Room;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -16,6 +17,7 @@ import com.example.mobilniproekt.model.Recipes;
 import com.example.mobilniproekt.recycleview.CustomAdapter;
 import com.example.mobilniproekt.retrofit.GetDataService;
 import com.example.mobilniproekt.retrofit.RetrofitClientInstance;
+import com.example.mobilniproekt.room.RecipeDatabase;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,6 +35,8 @@ public class ListActivity extends AppCompatActivity {
     private CardViewAdapter cardViewAdapter;
     private LinearLayoutManager linearLayoutManager;
 
+    private RecipeDatabase recipeDatabase;
+
     ProgressDialog progressDialog;
 
     @Override
@@ -40,7 +44,6 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_view);
         listInit();
-
 
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading....");
@@ -84,7 +87,7 @@ public class ListActivity extends AppCompatActivity {
     private void listInit()
     {
         recyclerView=findViewById(R.id.recyclerView);
-        cardViewAdapter=new CardViewAdapter(ListActivity.this);
+        cardViewAdapter=new CardViewAdapter(ListActivity.this, recipeDatabase);
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(cardViewAdapter);
