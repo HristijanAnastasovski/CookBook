@@ -14,7 +14,7 @@ import android.widget.Toast;
 import com.example.mobilniproekt.adapters.CardViewAdapter;
 import com.example.mobilniproekt.model.Recipe;
 import com.example.mobilniproekt.model.Recipes;
-import com.example.mobilniproekt.recycleview.CustomAdapter;
+
 import com.example.mobilniproekt.retrofit.GetDataService;
 import com.example.mobilniproekt.retrofit.RetrofitClientInstance;
 import com.example.mobilniproekt.room.RecipeDatabase;
