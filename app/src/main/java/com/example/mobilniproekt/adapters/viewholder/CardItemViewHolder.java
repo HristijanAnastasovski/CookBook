@@ -55,7 +55,7 @@ public class CardItemViewHolder extends RecyclerView.ViewHolder{
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        RecipeModel recipe=new RecipeModel(size+1, entity.getTitle(),entity.getImage_url(), entity.getPublisher(), entity.getSocial_rank(), entity.getF2f_url(), entity.getPublisher_url(), entity.getRecipe_id(), entity.getSource_url());
+                        RecipeModel recipe=new RecipeModel(entity.getRecipe_id(), entity.getPublisher(),entity.getF2f_url(), entity.getTitle(), entity.getSource_url(), entity.getImage_url(), entity.getSocial_rank(), entity.getPublisher_url());
                         database.daoAccess () . insertOnlySingleMovie (recipe);
                     }
                 }) .start();

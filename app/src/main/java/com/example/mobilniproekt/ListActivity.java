@@ -28,6 +28,8 @@ import retrofit2.Response;
 
 public class ListActivity extends AppCompatActivity {
 
+
+
     //private CustomAdapter adapter;
 
 
