@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 
 import com.example.mobilniproekt.R;
 import com.example.mobilniproekt.RecipeDetailsActivity;
-import com.example.mobilniproekt.adapters.viewholder.CardItemViewHolder;
+import com.example.mobilniproekt.adapters.viewholders.CardItemViewHolder;
 import com.example.mobilniproekt.model.Recipe;
 import com.example.mobilniproekt.room.RecipeDatabase;
 
@@ -45,7 +45,7 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardItemViewHolder>{
         cardItemViewHolder.bind(entity, database, data.size());
         cardItemViewHolder.getParent().setOnClickListener(v-> {
             Intent intent = new Intent(context, RecipeDetailsActivity.class);
-            intent.putExtra(context.getString(R.string.title_details), entity.getTitle());
+            intent.putExtra(context.getString(R.string.id_details), entity.getRecipe_id());
             context.startActivity(intent);
         });
     }

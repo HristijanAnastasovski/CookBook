@@ -1,8 +1,5 @@
-package com.example.mobilniproekt.adapters.viewholder;
+package com.example.mobilniproekt.adapters.viewholders;
 
-import android.arch.persistence.room.Room;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,12 +10,11 @@ import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.mobilniproekt.R;
 import com.example.mobilniproekt.model.Recipe;
 import com.example.mobilniproekt.room.RecipeDatabase;
 import com.example.mobilniproekt.room.RecipeModel;
-import com.jakewharton.picasso.OkHttp3Downloader;
-import com.squareup.picasso.Picasso;
 
 public class CardItemViewHolder extends RecyclerView.ViewHolder{
     private ImageView imageView;
@@ -40,6 +36,7 @@ public class CardItemViewHolder extends RecyclerView.ViewHolder{
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .thumbnail(Glide.with(imageView.getContext())
                         .load(R.drawable.ic_launcher_background))
+                .apply(new RequestOptions().override(600, 300))
                 .into(imageView);
     /*
         Picasso.with(itemView.getContext())
