@@ -1,6 +1,10 @@
 <resources>
     <string name="app_name">Cook Book</string>
     <string name="id_details">RecipeIdDetails</string>
+    <string name="main_menu_to_search">SEARCH FOR RECIPES</string>
+    <string name="main_menu_to_favorites">MY FAVORITE RECIPES</string>
+    <string name="main_menu_to_about">ABOUT US</string>
+    <string name="main_menu_to_exit">EXIT</string>
 
 
 </resources>
