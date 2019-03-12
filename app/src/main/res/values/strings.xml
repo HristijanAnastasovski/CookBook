@@ -5,6 +5,10 @@
     <string name="main_menu_to_favorites">MY FAVORITE RECIPES</string>
     <string name="main_menu_to_about">ABOUT US</string>
     <string name="main_menu_to_exit">EXIT</string>
-
+    <string name="ingredient">Ingredient: </string>
+    <string name="searchBy">Search by:</string>
+    <string name="selectedIngredients">Selected ingredients:</string>
+    <string name="listCurrentlyEmpty">Your list is currently empty :(</string>
+    <string name="queryString">QueryString</string>
 
 </resources>

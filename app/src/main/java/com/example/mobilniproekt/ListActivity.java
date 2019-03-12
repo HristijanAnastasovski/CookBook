@@ -51,27 +51,11 @@ public class ListActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
-        /*Create handle for the RetrofitInstance interface*/
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<Recipes> call = service.getRecipes();
-        call.enqueue(new Callback<Recipes>() {
-            @Override
-            public void onResponse(Call<Recipes> call, Response<Recipes> response) {
-                progressDialog.dismiss();
-                //TextView textViewTest=(TextView) findViewById(R.id.textViewTest);
-                //textViewTest.setText(response.body().getRecipeList().get(0).getTitle());
+        Bundle bundle = getIntent().getExtras();
+        String message = bundle.getString(ListActivity.this.getString(R.string.queryString));
+        getRecipes(message);
 
-                //Log.d(response.body().getRecipeList().get(10).getTitle(), response.body().getRecipeList().get(10).getPublisher());
-                //generateDataList(response.body().getRecipeList());
 
-                cardViewAdapter.updateData(response.body().getRecipeList());
-            }
-
-            @Override
-            public void onFailure(Call<Recipes> call, Throwable t) {
-                progressDialog.dismiss();
-            }
-        });
     }
     /*Method to generate List of data using RecyclerView with custom adapter*/
     private void generateDataList(List<Recipe> recipes) {
@@ -83,6 +67,28 @@ public class ListActivity extends AppCompatActivity {
 
 
 
+    }
+
+    public void getRecipes(String s)
+    {
+        /*Create handle for the RetrofitInstance interface*/
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Call<Recipes> call = service.getRecipes(s);
+        call.enqueue(new Callback<Recipes>() {
+            @Override
+            public void onResponse(Call<Recipes> call, Response<Recipes> response) {
+                progressDialog.dismiss();
+               
+                if(response.body().getCount()>0)
+                cardViewAdapter.updateData(response.body().getRecipeList());
+                //else da se ispise nesto
+            }
+
+            @Override
+            public void onFailure(Call<Recipes> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
     }
 
     /*Method that initializes the RecyclerView*/

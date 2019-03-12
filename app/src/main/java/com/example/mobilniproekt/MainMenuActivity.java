@@ -23,7 +23,7 @@ public class MainMenuActivity extends AppCompatActivity {
         btnToSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intentToSearch = new Intent(MainMenuActivity.this,MainActivity.class);
+                Intent intentToSearch = new Intent(MainMenuActivity.this,SearchActivity.class);
                 startActivity(intentToSearch);
             }
         });

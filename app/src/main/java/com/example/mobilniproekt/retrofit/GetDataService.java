@@ -11,13 +11,13 @@ import retrofit2.http.Query;
 
 public interface GetDataService {
 
-    @GET("/api/search?key=a7e55d14ff46b7a9b3f39aa49679bddf&q=milk,eggs")
-    Call<Recipes> getRecipes();
+    @GET("/api/search?key=1df1cc7a6a7945c6b7522d82d148810c&")
+    Call<Recipes> getRecipes(@Query("q") String q);
 
     // 1 api: 1df1cc7a6a7945c6b7522d82d148810c
     // 2 api: a7e55d14ff46b7a9b3f39aa49679bddf
 
-    @GET("/api/get?key=a7e55d14ff46b7a9b3f39aa49679bddf&")
+    @GET("/api/get?key=1df1cc7a6a7945c6b7522d82d148810c&")
     Call<RecipeDetailsWrapper> getRecipeDetail(@Query("rId") String rId);
 
 
