@@ -22,6 +22,7 @@ import com.example.mobilniproekt.model.RecipeDetailsWrapper;
 import com.example.mobilniproekt.model.Recipes;
 import com.example.mobilniproekt.retrofit.GetDataService;
 import com.example.mobilniproekt.retrofit.RetrofitClientInstance;
+import com.example.mobilniproekt.room.RecipeDatabase;
 
 import org.w3c.dom.Text;
 
@@ -47,9 +48,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         listInit();
         getDetailsData(id);
-
-
-
 
     }
 
@@ -79,8 +77,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 ingredientsAdapter.updateData(response.body().getRecipeDetails().getIngredients());
                 TextView authorNameTextView =(TextView) findViewById(R.id.authorNameTextView);
                 authorNameTextView.setText(response.body().getRecipeDetails().getPublisher());
-
-
 
                 progressDialog.dismiss();
 

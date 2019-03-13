@@ -40,7 +40,6 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardItemViewHolder>{
 
     @Override
     public void onBindViewHolder(@NonNull CardItemViewHolder cardItemViewHolder, int i) {
-
         Recipe entity = data.get(i);
         cardItemViewHolder.bind(entity, database, data.size());
         cardItemViewHolder.getParent().setOnClickListener(v-> {
@@ -60,8 +59,5 @@ public class CardViewAdapter extends RecyclerView.Adapter<CardItemViewHolder>{
     public void updateData(List<Recipe> data) {
         this.data.addAll(data);
         notifyDataSetChanged();
-
     }
-
-
 }
