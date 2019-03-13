@@ -73,7 +73,7 @@ public class SearchActivity extends AppCompatActivity {
                     StringBuilder sb= new StringBuilder();
                     for(int i=0;i<ingredients.size();i++)
                     {
-                        sb.append(ingredients.get(i));
+                        sb.append(ingredients.get(i).replaceAll(" ","%20"));
                         if(i+1<ingredients.size())
                         sb.append(",");
                     }

@@ -2,6 +2,8 @@ package com.example.mobilniproekt;
 
 import android.app.ProgressDialog;
 import android.arch.persistence.room.Room;
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -23,6 +25,7 @@ import com.example.mobilniproekt.room.RecipeDatabase;
 
 import org.w3c.dom.Text;
 
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,17 +85,25 @@ public class ListActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<Recipes> call, Response<Recipes> response) {
                 progressDialog.dismiss();
-               
-                if(response.body().getCount()>0) {
-                    cardViewAdapter.updateData(response.body().getRecipeList());
-                }
-                else
+
+               // if(isNetworkConnected() && ) {
+                    if (response.body().getCount() > 0) {
+                        cardViewAdapter.updateData(response.body().getRecipeList());
+                    } else {
+                        TextView noRecipesMatching = findViewById(R.id.noRecipesTextView);
+                        noRecipesMatching.setVisibility(View.VISIBLE);
+                        ImageView sadChefImageView = findViewById(R.id.sadChefImageView);
+                        sadChefImageView.setVisibility(View.VISIBLE);
+                    }
+               /* }else
                 {
                     TextView noRecipesMatching = findViewById(R.id.noRecipesTextView);
+                    noRecipesMatching.setText(ListActivity.this.getString(R.string.noInternet));
                     noRecipesMatching.setVisibility(View.VISIBLE);
-                    ImageView sadChefImageView=findViewById(R.id.sadChefImageView);
+                    ImageView sadChefImageView = findViewById(R.id.sadChefImageView);
                     sadChefImageView.setVisibility(View.VISIBLE);
-                }
+                }*/
+
             }
 
             @Override
@@ -101,6 +112,12 @@ public class ListActivity extends AppCompatActivity {
             }
         });
     }
+
+    /*private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }/*
 
     /*Method that initializes the RecyclerView*/
     private void listInit()
