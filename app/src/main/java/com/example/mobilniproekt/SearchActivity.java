@@ -43,6 +43,7 @@ public class SearchActivity extends AppCompatActivity {
         currentlyEmptyText = findViewById(R.id.currentlyEmptyTextView);
         searchForRecipesButton = findViewById(R.id.searchForRecipesButton);
 
+
         ingredientName.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 // If the event is a key-down event on the "enter" button

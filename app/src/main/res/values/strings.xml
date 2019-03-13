@@ -10,5 +10,8 @@
     <string name="selectedIngredients">Selected ingredients:</string>
     <string name="listCurrentlyEmpty">Your list is currently empty :(</string>
     <string name="queryString">QueryString</string>
+    <string name="noRecipesMatching">There are no recipes that match your ingredients.</string>
+    <string name="sadChef">Sad chef</string>
+    <string name="cookingIsEasy">Cooking is easy!</string>
 
 </resources>

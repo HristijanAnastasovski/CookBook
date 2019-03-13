@@ -34,7 +34,8 @@
         android:textSize="15sp"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewSelectedIngredients"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.404" />
 
     <EditText
         android:id="@+id/ingredientNameEditText"
@@ -61,18 +62,17 @@
         android:background="@android:drawable/ic_input_add"
         app:layout_constraintBottom_toTopOf="@+id/recyclerViewSelectedIngredients"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toEndOf="@id/ingredientNameEditText"
-        app:layout_constraintTop_toTopOf="parent" />
-
-
-
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.362" />
 
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recyclerViewSelectedIngredients"
         android:layout_width="match_parent"
         android:layout_height="280sp"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="80dp"
         android:scrollbarAlwaysDrawVerticalTrack="true"
         android:scrollbars="vertical"
 

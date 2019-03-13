@@ -8,6 +8,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,6 +20,8 @@ import com.example.mobilniproekt.model.Recipes;
 import com.example.mobilniproekt.retrofit.GetDataService;
 import com.example.mobilniproekt.retrofit.RetrofitClientInstance;
 import com.example.mobilniproekt.room.RecipeDatabase;
+
+import org.w3c.dom.Text;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -79,9 +83,16 @@ public class ListActivity extends AppCompatActivity {
             public void onResponse(Call<Recipes> call, Response<Recipes> response) {
                 progressDialog.dismiss();
                
-                if(response.body().getCount()>0)
-                cardViewAdapter.updateData(response.body().getRecipeList());
-                //else da se ispise nesto
+                if(response.body().getCount()>0) {
+                    cardViewAdapter.updateData(response.body().getRecipeList());
+                }
+                else
+                {
+                    TextView noRecipesMatching = findViewById(R.id.noRecipesTextView);
+                    noRecipesMatching.setVisibility(View.VISIBLE);
+                    ImageView sadChefImageView=findViewById(R.id.sadChefImageView);
+                    sadChefImageView.setVisibility(View.VISIBLE);
+                }
             }
 
             @Override
