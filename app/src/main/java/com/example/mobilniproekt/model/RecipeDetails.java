@@ -1,9 +1,15 @@
 package com.example.mobilniproekt.model;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
+import android.support.annotation.NonNull;
+
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
+@Entity
 public class RecipeDetails {
 
     @SerializedName("publisher")
@@ -18,6 +24,8 @@ public class RecipeDetails {
     @SerializedName("source_url")
     private String source_url;
 
+    @NonNull
+    @PrimaryKey
     @SerializedName("recipe_id")
     private String recipe_id;
 
@@ -30,6 +38,7 @@ public class RecipeDetails {
     @SerializedName("publisher_url")
     private String publisher_url;
 
+    @Ignore
     @SerializedName("ingredients")
     private List<String> ingredients;
 
@@ -77,7 +86,7 @@ public class RecipeDetails {
         return recipe_id;
     }
 
-    public void setRecipe_id(String recipe_id) {
+    public void setRecipe_id(@NonNull String recipe_id) {
         this.recipe_id = recipe_id;
     }
 

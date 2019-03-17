@@ -1,6 +1,17 @@
 <resources>
     <string name="app_name">Cook Book</string>
     <string name="id_details">RecipeIdDetails</string>
-
-
+    <string name="main_menu_to_search">SEARCH FOR RECIPES</string>
+    <string name="main_menu_to_favorites">MY FAVORITE RECIPES</string>
+    <string name="main_menu_to_about">ABOUT US</string>
+    <string name="main_menu_to_exit">EXIT</string>
+    <string name="ingredient">Ingredient: </string>
+    <string name="searchBy">Search by:</string>
+    <string name="selectedIngredients">Selected ingredients:</string>
+    <string name="listCurrentlyEmpty">Your list is currently empty :(</string>
+    <string name="queryString">QueryString</string>
+    <string name="noRecipesMatching">There are no recipes that match your ingredients.</string>
+    <string name="sadChef">Sad chef</string>
+    <string name="cookingIsEasy">Cooking is easy!</string>
+    <string name="noInternet">Please check your internet connection.</string>
 </resources>

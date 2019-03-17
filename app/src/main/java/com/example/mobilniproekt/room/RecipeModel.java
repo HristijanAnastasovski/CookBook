@@ -4,7 +4,7 @@ import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.PrimaryKey;
 import android.support.annotation.NonNull;
 
-@Entity (tableName = "recipe_item")
+@Entity
 public class RecipeModel {
 
     @NonNull
@@ -24,6 +24,10 @@ public class RecipeModel {
     private Float social_rank;
 
     private String publisher_url;
+
+    public RecipeModel(){
+
+    }
 
     public RecipeModel(@NonNull String recipe_id, String publisher, String f2f_url, String title, String source_url, String image_url, Float social_rank, String publisher_url) {
         this.recipe_id = recipe_id;

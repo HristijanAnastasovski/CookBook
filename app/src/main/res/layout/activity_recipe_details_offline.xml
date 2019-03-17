@@ -1,17 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-
-    >
-
+    android:layout_height="match_parent"
+    tools:context=".RecipeDetailsOfflineActivity">
 
     <ImageView
-        android:id="@+id/detailsImage"
+        android:id="@+id/detailsImageOffline"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:scaleType="centerCrop"
@@ -23,7 +19,7 @@
         />
 
     <TextView
-        android:id="@+id/ingredientsTextViewTag"
+        android:id="@+id/ingredientsTextViewTagOffline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="10sp"
@@ -32,10 +28,10 @@
 
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsImage" />
+        app:layout_constraintTop_toBottomOf="@+id/detailsImageOffline" />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewIngredients"
+        android:id="@+id/recyclerViewIngredientsOffline"
         android:layout_width="0dp"
         android:layout_height="280sp"
         android:layout_marginTop="10sp"
@@ -46,33 +42,33 @@
 
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientsTextViewTag"></android.support.v7.widget.RecyclerView>
+        app:layout_constraintTop_toBottomOf="@+id/ingredientsTextViewTagOffline" />
 
     <TextView
-        android:id="@+id/authorTextView"
+        android:id="@+id/authorTextViewOffline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="20sp"
         android:text="Recipe by:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredients" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredientsOffline" />
 
     <TextView
-        android:id="@+id/authorNameTextView"
+        android:id="@+id/authorNameTextViewOffline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40sp"
         android:layout_marginTop="20sp"
         android:text=""
         android:textSize="18sp"
-        app:layout_constraintStart_toEndOf="@+id/authorTextView"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredients"
+        app:layout_constraintStart_toEndOf="@+id/authorTextViewOffline"
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredientsOffline"
 
         />
 
     <Button
-        android:id="@+id/buttonToFullRecipe"
+        android:id="@+id/buttonToFullRecipeOffline"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
@@ -84,10 +80,10 @@
 
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/authorNameTextView" />
+        app:layout_constraintTop_toBottomOf="@+id/authorNameTextViewOffline" />
 
     <Button
-        android:id="@+id/buttonAddToFavorites"
+        android:id="@+id/buttonAddToFavoritesOffline"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="70dp"
@@ -96,7 +92,6 @@
         android:text="Add To Favorites"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/authorTextView" />
-
+        app:layout_constraintTop_toTopOf="@+id/authorTextViewOffline" />
 
 </android.support.constraint.ConstraintLayout>

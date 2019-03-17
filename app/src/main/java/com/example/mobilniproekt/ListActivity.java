@@ -2,12 +2,16 @@ package com.example.mobilniproekt;
 
 import android.app.ProgressDialog;
 import android.arch.persistence.room.Room;
+import android.content.Context;
+import android.net.ConnectivityManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -19,6 +23,9 @@ import com.example.mobilniproekt.retrofit.GetDataService;
 import com.example.mobilniproekt.retrofit.RetrofitClientInstance;
 import com.example.mobilniproekt.room.RecipeDatabase;
 
+import org.w3c.dom.Text;
+
+import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -51,27 +58,11 @@ public class ListActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
-        /*Create handle for the RetrofitInstance interface*/
-        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
-        Call<Recipes> call = service.getRecipes();
-        call.enqueue(new Callback<Recipes>() {
-            @Override
-            public void onResponse(Call<Recipes> call, Response<Recipes> response) {
-                progressDialog.dismiss();
-                //TextView textViewTest=(TextView) findViewById(R.id.textViewTest);
-                //textViewTest.setText(response.body().getRecipeList().get(0).getTitle());
+        Bundle bundle = getIntent().getExtras();
+        String message = bundle.getString(ListActivity.this.getString(R.string.queryString));
+        getRecipes(message);
 
-                //Log.d(response.body().getRecipeList().get(10).getTitle(), response.body().getRecipeList().get(10).getPublisher());
-                //generateDataList(response.body().getRecipeList());
 
-                cardViewAdapter.updateData(response.body().getRecipeList());
-            }
-
-            @Override
-            public void onFailure(Call<Recipes> call, Throwable t) {
-                progressDialog.dismiss();
-            }
-        });
     }
     /*Method to generate List of data using RecyclerView with custom adapter*/
     private void generateDataList(List<Recipe> recipes) {
@@ -84,6 +75,49 @@ public class ListActivity extends AppCompatActivity {
 
 
     }
+
+    public void getRecipes(String s)
+    {
+        /*Create handle for the RetrofitInstance interface*/
+        GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
+        Call<Recipes> call = service.getRecipes(s);
+        call.enqueue(new Callback<Recipes>() {
+            @Override
+            public void onResponse(Call<Recipes> call, Response<Recipes> response) {
+                progressDialog.dismiss();
+
+               // if(isNetworkConnected() && ) {
+                    if (response.body().getCount() > 0) {
+                        cardViewAdapter.updateData(response.body().getRecipeList());
+                    } else {
+                        TextView noRecipesMatching = findViewById(R.id.noRecipesTextView);
+                        noRecipesMatching.setVisibility(View.VISIBLE);
+                        ImageView sadChefImageView = findViewById(R.id.sadChefImageView);
+                        sadChefImageView.setVisibility(View.VISIBLE);
+                    }
+               /* }else
+                {
+                    TextView noRecipesMatching = findViewById(R.id.noRecipesTextView);
+                    noRecipesMatching.setText(ListActivity.this.getString(R.string.noInternet));
+                    noRecipesMatching.setVisibility(View.VISIBLE);
+                    ImageView sadChefImageView = findViewById(R.id.sadChefImageView);
+                    sadChefImageView.setVisibility(View.VISIBLE);
+                }*/
+
+            }
+
+            @Override
+            public void onFailure(Call<Recipes> call, Throwable t) {
+                progressDialog.dismiss();
+            }
+        });
+    }
+
+    /*private boolean isNetworkConnected() {
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+
+        return cm.getActiveNetworkInfo() != null;
+    }/*
 
     /*Method that initializes the RecyclerView*/
     private void listInit()

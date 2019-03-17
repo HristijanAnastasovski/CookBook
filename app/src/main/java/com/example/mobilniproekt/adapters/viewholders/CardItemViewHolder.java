@@ -26,7 +26,7 @@ public class CardItemViewHolder extends RecyclerView.ViewHolder{
         super(itemView);
         this.imageView=itemView.findViewById(R.id.image);
         this.titleTextView=itemView.findViewById(R.id.title);
-        this.AddToList=itemView.findViewById(R.id.buttonAddToList);
+        //this.AddToList=itemView.findViewById(R.id.buttonAddToList);
     }
 
     public void bind(final Recipe entity, RecipeDatabase database, int size)
@@ -46,7 +46,8 @@ public class CardItemViewHolder extends RecyclerView.ViewHolder{
                 */
         titleTextView.setText(entity.getTitle());
 
-        AddToList.setOnClickListener(new View.OnClickListener() {
+        // ova da bide vo RecipeDetailsActivity
+      /*  AddToList.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new Thread(new Runnable() {
@@ -58,7 +59,7 @@ public class CardItemViewHolder extends RecyclerView.ViewHolder{
                 }) .start();
 
             }
-        });
+        });*/
     }
 
     public ImageView getImageView() {
