@@ -19,7 +19,7 @@ import static android.arch.persistence.room.OnConflictStrategy.REPLACE;
 @Dao
 public interface DaoAccess {
 
-    @Insert
+    @Insert (onConflict = REPLACE)
     void insertOnlySingleRecipe (RecipeModel recipe);
     @Insert(onConflict = REPLACE)
     void insertMultipleRecipes (List<RecipeModel> recipes);
@@ -47,6 +47,8 @@ public interface DaoAccess {
     void insertMultipleMappings(List<MappingModel> mappings);
     @Query("SELECT * FROM MappingModel WHERE recipeID= :recipeID")
     List<MappingModel> getMappings(String recipeID);
+    @Delete
+    void deleteMultipleMappings(List<MappingModel> mappingModels);
 
     @Query("DELETE FROM recipemodel")
     void nukeRecipes();

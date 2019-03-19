@@ -1,12 +1,15 @@
 package com.example.mobilniproekt.adapters;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -22,24 +25,25 @@ import de.hdodenhof.circleimageview.CircleImageView;
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder>{
 
     private List<RecipeModel> list;
-    private Context context;
+    private Activity context;
+    private int position;
 
-    public FavoritesAdapter(List<RecipeModel> list, Context context) {
+    public FavoritesAdapter(List<RecipeModel> list, Activity context) {
         this.list = list;
         this.context = context;
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
-        private CircleImageView circleImageView;
+        private ImageView imageView;
         private TextView title;
-        private RelativeLayout relativeLayout;
+        private CardView relativeLayout;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-            circleImageView=(CircleImageView) itemView.findViewById(R.id.favoritesCircleImage);
+            imageView=itemView.findViewById(R.id.favoritesImage);
             title=(TextView) itemView.findViewById(R.id.favoritesTitle);
-            relativeLayout=(RelativeLayout) itemView.findViewById(R.id.favorites_layout);
+            relativeLayout=itemView.findViewById(R.id.favorites_layout);
         }
     }
 
@@ -56,7 +60,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         Glide.with(context)
                 .asBitmap()
                 .load(list.get(i).getImage_url())
-                .into(viewHolder.circleImageView);
+                .into(viewHolder.imageView);
 
         viewHolder.title.setText(list.get(i).getTitle());
 
@@ -66,7 +70,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 //Clicking on the item
                 Intent intent=new Intent(context, RecipeDetailsOfflineActivity.class);
                 intent.putExtra("Recipe ID", list.get(i).getRecipe_id());
-                context.startActivity(intent);
+                intent.putExtra("position", String.valueOf(viewHolder.getAdapterPosition()));
+                context.startActivityForResult(intent, 999);
             }
         });
     }
@@ -76,4 +81,8 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         return list.size();
     }
 
+    public void delete(int position) {
+        list.remove(position);
+        notifyItemRemoved(position);
+    }
 }

@@ -55,10 +55,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     private ImageView imageView;
+    private ImageView heartImage;
     private TextView authorNameTextView ;
     private Button fullGuideButton;
-
-    private Button buttonAdd;
 
     private DatabseController database;
 
@@ -78,10 +77,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         String id = intent.getStringExtra(getString(R.string.id_details));
 
         imageView = findViewById(R.id.detailsImage);
+        heartImage=findViewById(R.id.imageViewHeart);
         authorNameTextView =findViewById(R.id.authorNameTextView);
         fullGuideButton = findViewById(R.id.buttonToFullRecipe);
-        buttonAdd=(Button) findViewById(R.id.buttonAddToFavorites);
-
 
         listInit();
         getDetailsData(id);
@@ -101,19 +99,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         progressDialog.setMessage("Loading....");
         progressDialog.show();
 
-       /* List<String> lista = new ArrayList<>();
-        String author="Author";
-        for(int i=1;i<=15;i++)
-        {
-            lista.add(Integer.toString(i));
-        }
-        lista.add("asdasasdadsasdadsadsadsdasasdasasdadsa sdadsads adsdas");
-        ingredientsAdapter.updateData(lista);
-        TextView authorNameTextView =(TextView) findViewById(R.id.authorNameTextView);
-        authorNameTextView.setText(author);
-        progressDialog.dismiss();*/
-
-        /*Create handle for the RetrofitInstance interface*/
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<RecipeDetailsWrapper> call = service.getRecipeDetail(id);
         call.enqueue(new Callback<RecipeDetailsWrapper>() {
@@ -147,7 +132,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
                 isAdded=database.checkIfExists(recipe);
 
-                if(isAdded) buttonAdd.setText("Remove from list");
+                if(isAdded) {
+                    heartImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.redHeart));
+                }
 
                 progressDialog.dismiss();
             }
@@ -158,20 +145,25 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
         });
 
-        buttonAdd.setOnClickListener(new View.OnClickListener() {
+        heartImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RecipeModel model=setRecipeModel(recipe);
-
+                Toast toast=new Toast(getApplicationContext());
                 if(!isAdded) {
                     database.insertSingleRecipe(model);
                     database.insertDetailedRecipe(recipe);
+                    isAdded=!isAdded;
+                    heartImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.redHeart));
+                    toast.makeText(getApplicationContext(), "Recipe Successfully Added To My Favorites", Toast.LENGTH_LONG).show();
                 }
                 else {
-
+                    database.removeRecipe(model);
+                    database.removeDetailedRecipe(recipe);
+                    isAdded=!isAdded;
+                    heartImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.whiteHeart));
+                    toast.makeText(getApplicationContext(), "Recipe Successfully Removed From My Favorites", Toast.LENGTH_LONG).show();
                 }
-                Toast toast=new Toast(getApplicationContext());
-                toast.makeText(getApplicationContext(), "Recipe Successfully Added To My Favorites", Toast.LENGTH_LONG).show();
             }
         });
     }

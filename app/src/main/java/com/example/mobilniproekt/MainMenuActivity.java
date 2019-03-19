@@ -24,6 +24,9 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
 
+
+
+        /*
         database= Room.databaseBuilder(getApplicationContext(), RecipeDatabase.class, "recipes_db")
                 .fallbackToDestructiveMigration()
                 .build();
@@ -31,9 +34,9 @@ public class MainMenuActivity extends AppCompatActivity {
         new Thread(new Runnable() {
             @Override
             public void run() {
-                //database.daoAccess().nukeRecipes();
-                //database.daoAccess().nukeDetails();
-                //database.daoAccess().nukeMappings();
+                database.daoAccess().nukeRecipes();
+                database.daoAccess().nukeDetails();
+                database.daoAccess().nukeMappings();
                 semaphore.release();
             }
         }).start();
@@ -43,6 +46,8 @@ public class MainMenuActivity extends AppCompatActivity {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+        */
+
 
         Button btnToSearch = findViewById(R.id.mainMenuToSearchButton);
         Button btnToFavorites = findViewById(R.id.mainMenuToFavoritesButton);

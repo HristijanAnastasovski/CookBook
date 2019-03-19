@@ -20,14 +20,16 @@ public class DatabseController {
 
     private Semaphore semaphoreSingleRecipeDetails;
     private Semaphore semaphoreForMappings;
+    private Semaphore semaphoreForSingleRecipe;
     private static RecipeDatabase recipeDatabase;
     private boolean isAdded;
     private List<RecipeModel> recipes;
     private RecipeDetails recipeDetails;
+    private RecipeModel recipeModel;
     private List<String> ingreedients;
 
     public DatabseController(Context context){
-        recipeDatabase= Room.databaseBuilder(context, RecipeDatabase.class, "recipe_db")
+        recipeDatabase= Room.databaseBuilder(context, RecipeDatabase.class, "recipes_db")
                 .fallbackToDestructiveMigration()
                 .build();
     }
@@ -38,6 +40,10 @@ public class DatabseController {
 
     public void initSemaphoreForMapping(){
         semaphoreForMappings=new Semaphore(0);
+    }
+
+    public void initSemaphoreForSingleRecipe(){
+        semaphoreForSingleRecipe=new Semaphore(0);
     }
 
     public static void insertSingleRecipe(final RecipeModel model) {
@@ -70,17 +76,23 @@ public class DatabseController {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                recipeDatabase.daoAccess().insertOnlySingleRecipe(model);
+                recipeDatabase.daoAccess().deleteRecipe(model);
                 return null;
             }
         }.execute();
     }
 
-    public static void RemoveDetailedRecipe(final RecipeModel model) {
+    public static void removeDetailedRecipe(final RecipeDetails model) {
         new AsyncTask<Void, Void, Void>() {
             @Override
             protected Void doInBackground(Void... voids) {
-                recipeDatabase.daoAccess().insertOnlySingleRecipe(model);
+                recipeDatabase.daoAccess().deleteRecipeDetails(model);
+                List<MappingModel> mappingModels=new ArrayList<>();
+                for(String ingreedient:model.getIngredients()){
+                    MappingModel mapping=new MappingModel(model.getRecipe_id(), ingreedient);
+                    mappingModels.add(mapping);
+                }
+                recipeDatabase.daoAccess().deleteMultipleMappings(mappingModels);
                 return null;
             }
         }.execute();
@@ -106,6 +118,22 @@ public class DatabseController {
             e.printStackTrace();
         }
         return recipes;
+    }
+
+    public RecipeModel getOneRecipe(String recipeID){
+           new Thread(new Runnable() {
+               @Override
+               public void run() {
+                   recipeModel=recipeDatabase.daoAccess().getOneRecipe(recipeID);
+                   semaphoreForSingleRecipe.release();
+               }
+           }).start();
+        try {
+            semaphoreForSingleRecipe.acquire();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+        return recipeModel;
     }
 
     public RecipeDetails getOneDetailedRecipe(String recipeID) throws InterruptedException {

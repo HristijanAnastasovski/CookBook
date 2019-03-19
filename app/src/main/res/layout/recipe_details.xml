@@ -4,10 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-
-
-    >
+    android:layout_height="wrap_content">
 
 
     <ImageView
@@ -26,27 +23,27 @@
         android:id="@+id/ingredientsTextViewTag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="10sp"
         android:text="Ingredients:"
         android:textSize="20sp"
+        android:layout_marginTop="10sp"
 
 
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/detailsImage" />
+        app:layout_constraintTop_toBottomOf="@+id/detailsImage"
+        />
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recyclerViewIngredients"
-        android:layout_width="0dp"
-        android:layout_height="280sp"
         android:layout_marginTop="10sp"
-        android:scrollbarAlwaysDrawVerticalTrack="true"
+        android:id="@+id/recyclerViewIngredients"
+        android:layout_width="match_parent"
+        android:layout_height="280sp"
         android:scrollbars="vertical"
+        android:scrollbarAlwaysDrawVerticalTrack="true"
 
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ingredientsTextViewTag"
 
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ingredientsTextViewTag"></android.support.v7.widget.RecyclerView>
+        tools:layout_editor_absoluteX="0dp"></android.support.v7.widget.RecyclerView>
 
     <TextView
         android:id="@+id/authorTextView"
@@ -56,16 +53,18 @@
         android:text="Recipe by:"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredients" />
+        app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredients"
+        />
 
     <TextView
         android:id="@+id/authorNameTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="40sp"
+        android:layout_marginLeft="20sp"
         android:layout_marginTop="20sp"
-        android:text=""
         android:textSize="18sp"
+        android:text=""
         app:layout_constraintStart_toEndOf="@+id/authorTextView"
         app:layout_constraintTop_toBottomOf="@+id/recyclerViewIngredients"
 
@@ -76,27 +75,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
 
-        android:layout_marginTop="40sp"
-        android:background="@drawable/full_recipe_button"
         android:text="recipe guide"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/authorNameTextView" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/authorNameTextView"
 
-    <Button
-        android:id="@+id/buttonAddToFavorites"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="70dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="70dp"
-        android:text="Add To Favorites"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/authorTextView" />
+        android:layout_marginTop="40sp"
+        android:background="@drawable/full_recipe_button"
+        android:textColor="#FFFFFF"
+        />
+
+    <ImageView
+        android:id="@+id/imageViewHeart"
+        android:layout_width="175dp"
+        android:layout_height="94dp"
+        app:srcCompat="@drawable/heart_icon"
+        tools:layout_editor_absoluteX="236dp"
+        tools:layout_editor_absoluteY="14dp"
+        tools:ignore="MissingConstraints" />
 
 
 </android.support.constraint.ConstraintLayout>
