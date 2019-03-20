@@ -13,12 +13,18 @@
         android:roundIcon="@mipmap/ic_cook_book_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".ListActivity"></activity>
         <activity android:name=".RecipeDetailsActivity"></activity>
         <activity android:name=".MainMenuActivity">
 
         </activity>
-        <activity android:name=".SearchActivity"></activity>
+
+        <activity android:name=".RecipeDetailsOfflineActivity"></activity>
+        <activity android:name=".FavoritesActivity" ></activity>
+
+        <activity android:name=".SearchActivity" ></activity>
+
         <activity android:name=".SplashScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,6 +33,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>
