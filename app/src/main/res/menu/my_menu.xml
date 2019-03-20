@@ -5,8 +5,7 @@
     >
     <item
         android:id="@+id/action_settings"
-        android:orderInCategory="100"
         android:title="Button title"
-        android:icon="@android:drawable/btn_star_big_on"
-        app:showAsAction="never" />
+        android:icon="@drawable/ic_favorite_icon"
+        />
 </menu>

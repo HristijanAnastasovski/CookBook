@@ -23,7 +23,7 @@
         <activity android:name=".RecipeDetailsOfflineActivity"></activity>
         <activity android:name=".FavoritesActivity" ></activity>
 
-        <activity android:name=".SearchActivity" ></activity>
+        <activity android:name=".SearchActivity"  android:windowSoftInputMode="adjustResize" ></activity>
 
         <activity android:name=".SplashScreenActivity">
             <intent-filter>

@@ -14,6 +14,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.request.RequestOptions;
 import com.example.mobilniproekt.R;
 import com.example.mobilniproekt.RecipeDetailsOfflineActivity;
 import com.example.mobilniproekt.room.RecipeModel;
@@ -60,6 +61,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         Glide.with(context)
                 .asBitmap()
                 .load(list.get(i).getImage_url())
+                .apply(new RequestOptions().override(600, 300))
                 .into(viewHolder.imageView);
 
         viewHolder.title.setText(list.get(i).getTitle());

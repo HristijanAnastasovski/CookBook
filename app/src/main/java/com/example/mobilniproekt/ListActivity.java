@@ -3,13 +3,18 @@ package com.example.mobilniproekt;
 import android.app.ProgressDialog;
 import android.arch.persistence.room.Room;
 import android.content.Context;
+import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -53,7 +58,7 @@ public class ListActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_card_view);
         listInit();
-
+        initBottomNavigation();
         progressDialog = new ProgressDialog(this);
         progressDialog.setMessage("Loading....");
         progressDialog.show();
@@ -78,6 +83,14 @@ public class ListActivity extends AppCompatActivity {
 
     public void getRecipes(String s)
     {
+        if(!haveNetworkConnection())
+        {
+            TextView noRecipesMatching = findViewById(R.id.noRecipesTextView);
+            noRecipesMatching.setText("Please check your internet connection.");
+            noRecipesMatching.setVisibility(View.VISIBLE);
+            ImageView sadChefImageView = findViewById(R.id.sadChefImageView);
+            sadChefImageView.setVisibility(View.VISIBLE);
+        }
         /*Create handle for the RetrofitInstance interface*/
         GetDataService service = RetrofitClientInstance.getRetrofitInstance().create(GetDataService.class);
         Call<Recipes> call = service.getRecipes(s);
@@ -127,5 +140,49 @@ public class ListActivity extends AppCompatActivity {
         linearLayoutManager = new LinearLayoutManager(this);
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(cardViewAdapter);
+
+    }
+
+    public void initBottomNavigation()
+    {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.ic_home:
+                        Intent intent1 = new Intent (ListActivity.this,MainMenuActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.ic_search:
+                        Intent intent2 = new Intent (ListActivity.this,SearchActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.ic_favorites:
+                        Intent intent3 = new Intent (ListActivity.this,FavoritesActivity.class);
+                        startActivity(intent3);
+                        break;
+
+                }
+                return false;
+            }
+        });
+    }
+
+    private boolean haveNetworkConnection() {
+        boolean haveConnectedWifi = false;
+        boolean haveConnectedMobile = false;
+
+        ConnectivityManager cm = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo[] netInfo = cm.getAllNetworkInfo();
+        for (NetworkInfo ni : netInfo) {
+            if (ni.getTypeName().equalsIgnoreCase("WIFI"))
+                if (ni.isConnected())
+                    haveConnectedWifi = true;
+            if (ni.getTypeName().equalsIgnoreCase("MOBILE"))
+                if (ni.isConnected())
+                    haveConnectedMobile = true;
+        }
+        return haveConnectedWifi || haveConnectedMobile;
     }
 }

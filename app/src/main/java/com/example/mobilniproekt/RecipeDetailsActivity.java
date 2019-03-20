@@ -8,6 +8,8 @@ import android.media.Image;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -15,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -72,7 +75,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_details);
-
+        initBottomNavigation();
         Intent intent = getIntent();
         String id = intent.getStringExtra(getString(R.string.id_details));
 
@@ -188,5 +191,31 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         model.setSocial_rank(recipe.getSocial_rank());
         model.setSource_url(recipe.getSource_url());
         return model;
+    }
+
+    public void initBottomNavigation()
+    {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.ic_home:
+                        Intent intent1 = new Intent (RecipeDetailsActivity.this,MainMenuActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.ic_search:
+                        Intent intent2 = new Intent (RecipeDetailsActivity.this,SearchActivity.class);
+                        startActivity(intent2);
+                        break;
+                    case R.id.ic_favorites:
+                        Intent intent3 = new Intent (RecipeDetailsActivity.this,FavoritesActivity.class);
+                        startActivity(intent3);
+                        break;
+
+                }
+                return false;
+            }
+        });
     }
 }

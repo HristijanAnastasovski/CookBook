@@ -4,10 +4,13 @@ import android.content.Context;
 import android.content.Intent;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.KeyEvent;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
@@ -18,6 +21,9 @@ import android.widget.Toast;
 
 import com.example.mobilniproekt.adapters.IngredientsAdapter;
 import com.example.mobilniproekt.adapters.IngredientsSelectionAdapter;
+
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
+import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,16 +38,36 @@ public class SearchActivity extends AppCompatActivity {
     private List<String> ingredientsList;
     private TextView currentlyEmptyText;
     private Button searchForRecipesButton;
+    private BottomNavigationView navigation;
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.search_ingredients_menu);
         listInit();
+        initBottomNavigation();
         ingredientsList= new ArrayList<>();
         ingredientName = findViewById(R.id.ingredientNameEditText);
         addIngredient=findViewById(R.id.ingredientAddButton);
         currentlyEmptyText = findViewById(R.id.currentlyEmptyTextView);
         searchForRecipesButton = findViewById(R.id.searchForRecipesButton);
+        navigation = findViewById(R.id.bottomNav);
+
+        KeyboardVisibilityEvent.setEventListener(
+                this,
+                new KeyboardVisibilityEventListener() {
+                    @Override
+                    public void onVisibilityChanged(boolean isOpen) {
+                        if(isOpen){
+
+                            navigation.setVisibility(View.INVISIBLE);
+
+                        }else{
+
+                            navigation.setVisibility(View.VISIBLE);
+
+                        }
+                    }
+                });
 
 
         ingredientName.setOnKeyListener(new View.OnKeyListener() {
@@ -125,5 +151,27 @@ public class SearchActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(linearLayoutManager);
         recyclerView.setAdapter(ingredientsSelectionAdapter);
 
+    }
+
+    public void initBottomNavigation()
+    {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.ic_home:
+                        Intent intent1 = new Intent (SearchActivity.this,MainMenuActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.ic_favorites:
+                        Intent intent2 = new Intent (SearchActivity.this,FavoritesActivity.class);
+                        startActivity(intent2);
+                        break;
+
+                }
+                return false;
+            }
+        });
     }
 }

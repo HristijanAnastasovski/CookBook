@@ -5,12 +5,15 @@ import android.arch.lifecycle.Observer;
 import android.arch.persistence.room.Room;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.example.mobilniproekt.adapters.FavoritesAdapter;
@@ -34,7 +37,7 @@ public class FavoritesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
-
+        initBottomNavigation();
         database=new DatabseController(getApplicationContext());
         semaphore.release();
 
@@ -64,5 +67,27 @@ public class FavoritesActivity extends AppCompatActivity {
                 Log.d("message", "not removed");
             }
         }
+    }
+
+    public void initBottomNavigation()
+    {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.ic_search:
+                        Intent intent1 = new Intent (FavoritesActivity.this,SearchActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.ic_home:
+                        Intent intent2 = new Intent (FavoritesActivity.this,MainMenuActivity.class);
+                        startActivity(intent2);
+                        break;
+
+                }
+                return false;
+            }
+        });
     }
 }

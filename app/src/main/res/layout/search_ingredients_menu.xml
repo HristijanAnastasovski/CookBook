@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -107,15 +108,31 @@
         android:layout_height="wrap_content"
 
 
-        android:background="@drawable/full_recipe_button"
+        android:background="@drawable/new_button"
+        android:textColor="#5D6063"
         android:text="Search for recipes"
-        android:textColor="#FFFFFF"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
+
+
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recyclerViewSelectedIngredients"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewSelectedIngredients"
         app:layout_constraintVertical_bias="0.36" />
+
+
+    <android.support.design.widget.BottomNavigationView
+
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:background="#FFA500"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:menu="@menu/bottom_navigation_menu"
+        tools:layout_editor_absoluteX="0dp"
+        />
+
+
+
 
 
 </android.support.constraint.ConstraintLayout>

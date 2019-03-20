@@ -4,9 +4,12 @@ import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 
@@ -19,10 +22,12 @@ public class MainMenuActivity extends AppCompatActivity {
     private RecipeDatabase database;
     private static Semaphore semaphore=new Semaphore(0);
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_menu);
+        initBottomNavigation();
 
 
 
@@ -100,6 +105,28 @@ public class MainMenuActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent=new Intent(getApplicationContext(), FavoritesActivity.class);
                 startActivity(intent);
+            }
+        });
+    }
+
+    public void initBottomNavigation()
+    {
+        BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
+        bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                switch(menuItem.getItemId()){
+                    case R.id.ic_search:
+                        Intent intent1 = new Intent (MainMenuActivity.this,SearchActivity.class);
+                        startActivity(intent1);
+                        break;
+                    case R.id.ic_favorites:
+                        Intent intent2 = new Intent (MainMenuActivity.this,FavoritesActivity.class);
+                        startActivity(intent2);
+                        break;
+
+                }
+                return false;
             }
         });
     }
