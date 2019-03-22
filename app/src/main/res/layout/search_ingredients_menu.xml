@@ -109,7 +109,7 @@
 
 
         android:background="@drawable/new_button"
-        android:textColor="#5D6063"
+        android:textColor="#ffffff"
         android:text="Search for recipes"
 
 
@@ -124,11 +124,13 @@
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:background="#FFA500"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:menu="@menu/bottom_navigation_menu"
         tools:layout_editor_absoluteX="0dp"
+        android:background="#1aa260"
+        app:itemTextColor="@color/whiteHeart"
+        app:itemIconTint="@color/whiteHeart"
         />
 
 

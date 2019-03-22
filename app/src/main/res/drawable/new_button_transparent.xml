@@ -4,7 +4,7 @@
         android:radius="30dp"
         />
     <solid
-        android:color="#1aa260"
+        android:color="#661aa260"
         />
     <padding
         android:left="0dp"
@@ -16,10 +16,10 @@
         android:width="270dp"
         android:height="60dp"
         />
-<!--    <stroke
-        android:width="3dp"
-        android:color="#5D6063"
-        />-->
+    <!--    <stroke
+            android:width="3dp"
+            android:color="#5D6063"
+            />-->
 
 </shape>
-<!--FFA500-->
+    <!--FFA500-->

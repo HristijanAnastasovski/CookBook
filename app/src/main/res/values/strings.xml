@@ -14,4 +14,10 @@
     <string name="sadChef">Sad chef</string>
     <string name="cookingIsEasy">Cooking is easy!</string>
     <string name="noInternet">Please check your internet connection.</string>
+    <string name="appPurposeText">- We made this application to help you find out new recipes that you have never seen before. By using this application you can easily mix your leftover ingredients and find tasty meals. If you feel like the recipe is good enough you can add it to your favorites list and access the recipe even without internet connection! </string>
+    <string name="references">- API: www.food2fork.com\n- MEDIA: www.pexels.com\n</string>
+    <string name="developedBy">- Hristijan Anastasovski \n- Ljuben Angelkoski </string>
+    <string name="contactHristijan">anastasovski.h@gmail.com</string>
+    <string name="contactLjuben">ljuben_angelkoski@live.com</string>
+
 </resources>
