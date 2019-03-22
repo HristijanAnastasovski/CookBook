@@ -60,11 +60,7 @@ public class FavoritesActivity extends AppCompatActivity {
         super.onActivityResult(requestCode, resultCode, data);
         if(requestCode==999 && resultCode==RESULT_OK){
             if(data.getStringExtra("remove").equals("yes")){
-                Log.d("number", data.getStringExtra("position"));
                 favoritesAdapter.delete(Integer.parseInt(data.getStringExtra("position")));
-            }
-            else if(data.getStringExtra("remove").equals("no")){
-                Log.d("message", "not removed");
             }
         }
     }
@@ -78,16 +74,24 @@ public class FavoritesActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()){
                     case R.id.ic_search:
                         Intent intent1 = new Intent (FavoritesActivity.this,SearchActivity.class);
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent1);
                         break;
                     case R.id.ic_home:
                         Intent intent2 = new Intent (FavoritesActivity.this,MainMenuActivity.class);
+                        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent2);
                         break;
-
                 }
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent=new Intent(FavoritesActivity.this,MainMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }

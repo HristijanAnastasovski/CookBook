@@ -1,5 +1,6 @@
 package com.example.mobilniproekt;
 
+import android.app.ActivityManager;
 import android.arch.persistence.room.Room;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.widget.Button;
 
 import com.example.mobilniproekt.room.RecipeDatabase;
 
+import java.util.List;
 import java.util.concurrent.Semaphore;
 
 public class MainMenuActivity extends AppCompatActivity {
@@ -123,19 +125,28 @@ public class MainMenuActivity extends AppCompatActivity {
         bottomNavigationView.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
+                ActivityManager manager=(ActivityManager) getSystemService(ACTIVITY_SERVICE);
+                List<ActivityManager.RunningTaskInfo> taskList = manager.getRunningTasks(10);
                 switch(menuItem.getItemId()){
                     case R.id.ic_search:
                         Intent intent1 = new Intent (MainMenuActivity.this,SearchActivity.class);
                         startActivity(intent1);
+                        if(taskList.get(0).numActivities!=1) finish();
                         break;
                     case R.id.ic_favorites:
                         Intent intent2 = new Intent (MainMenuActivity.this,FavoritesActivity.class);
                         startActivity(intent2);
+                        if(taskList.get(0).numActivities!=1) finish();
                         break;
-
                 }
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        finish();
+        System.exit(0);
     }
 }

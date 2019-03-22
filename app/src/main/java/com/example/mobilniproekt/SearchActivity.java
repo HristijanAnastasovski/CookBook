@@ -162,10 +162,12 @@ public class SearchActivity extends AppCompatActivity {
                 switch(menuItem.getItemId()){
                     case R.id.ic_home:
                         Intent intent1 = new Intent (SearchActivity.this,MainMenuActivity.class);
+                        intent1.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent1);
                         break;
                     case R.id.ic_favorites:
                         Intent intent2 = new Intent (SearchActivity.this,FavoritesActivity.class);
+                        intent2.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent2);
                         break;
 
@@ -173,5 +175,12 @@ public class SearchActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    @Override
+    public void onBackPressed(){
+        Intent intent=new Intent(SearchActivity.this,MainMenuActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 }
