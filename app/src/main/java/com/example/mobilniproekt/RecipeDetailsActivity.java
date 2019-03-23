@@ -131,7 +131,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 isAdded=!isAdded;
 
                 toast.makeText(getApplicationContext(), "Recipe Successfully Added To My Favorites", Toast.LENGTH_LONG).show();
-                item.setIcon(R.drawable.ic_favorite_white_filled);
+                item.setIcon(R.drawable.ic_favorite_red_filled);
             }
             else {
                 database.removeRecipe(model);
@@ -187,7 +187,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
                 if(isAdded) {
                     if(btnFavorites!=null)
-                    btnFavorites.setIcon(R.drawable.ic_favorite_white_filled);
+                    btnFavorites.setIcon(R.drawable.ic_favorite_red_filled);
                     //heartImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.redHeart));
                 }
 
