@@ -1,7 +1,9 @@
 package com.example.mobilniproekt;
 
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -28,6 +30,8 @@ import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventList
 import java.util.ArrayList;
 import java.util.List;
 
+import static com.example.mobilniproekt.adapters.IngredientsSelectionAdapter.LIST_EMPTY;
+
 public class SearchActivity extends AppCompatActivity {
 
     private RecyclerView recyclerView;
@@ -39,6 +43,8 @@ public class SearchActivity extends AppCompatActivity {
     private TextView currentlyEmptyText;
     private Button searchForRecipesButton;
     private BottomNavigationView navigation;
+    private EmptyListBroadcastReceiver receiver=new EmptyListBroadcastReceiver();
+
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -51,6 +57,10 @@ public class SearchActivity extends AppCompatActivity {
         currentlyEmptyText = findViewById(R.id.currentlyEmptyTextView);
         searchForRecipesButton = findViewById(R.id.searchForRecipesButton);
         navigation = findViewById(R.id.bottomNav);
+
+        IntentFilter filter = new IntentFilter(LIST_EMPTY);
+        this.registerReceiver(receiver,filter);
+
 
         KeyboardVisibilityEvent.setEventListener(
                 this,
@@ -118,7 +128,11 @@ public class SearchActivity extends AppCompatActivity {
 
     }
 
-
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        this.unregisterReceiver(receiver);
+    }
 
     public void addIngredientToList()
     {
@@ -182,5 +196,12 @@ public class SearchActivity extends AppCompatActivity {
         Intent intent=new Intent(SearchActivity.this,MainMenuActivity.class);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
+    }
+
+    public class EmptyListBroadcastReceiver extends BroadcastReceiver{
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            currentlyEmptyText.setVisibility(View.VISIBLE);
+        }
     }
 }

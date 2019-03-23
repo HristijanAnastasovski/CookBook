@@ -1,6 +1,7 @@
 package com.example.mobilniproekt.adapters;
 
 import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -18,6 +19,8 @@ public class IngredientsSelectionAdapter extends RecyclerView.Adapter<Ingredient
 
     private List<String> ingredients;
     private Context context;
+    public static final String LIST_EMPTY= "LIST_EMPTY";
+
     public IngredientsSelectionAdapter (Context context) {
         this.context=context;
         this.ingredients = new ArrayList<>();
@@ -53,12 +56,19 @@ public class IngredientsSelectionAdapter extends RecyclerView.Adapter<Ingredient
 
     public void delete(int position) { //removes the row
         ingredients.remove(position);
+        if(ingredients.size()<1)
+        {
+            Intent broadcast = new Intent(LIST_EMPTY);
+            context.sendBroadcast(broadcast);
+        }
         notifyItemRemoved(position);
     }
 
     public void updateData(String data) {
         this.ingredients.add(data);
+
         notifyDataSetChanged();
+
 
     }
 
@@ -91,4 +101,5 @@ public class IngredientsSelectionAdapter extends RecyclerView.Adapter<Ingredient
             delete(getAdapterPosition()); //calls the method above to delete
         }
     }
+
 }

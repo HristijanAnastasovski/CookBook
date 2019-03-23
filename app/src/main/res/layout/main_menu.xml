@@ -1,87 +1,114 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@drawable/baked_chef_cook_colour"
-    android:scaleType="fitXY"
-    >
+    android:scaleType="fitXY">
 
 
-    <Button
-        android:id="@+id/mainMenuToSearchButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="50sp"
-        android:gravity="center"
-        android:text="@string/main_menu_to_search"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+
+
+    <ScrollView
+        android:id="@+id/scrollView2"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+
+        android:layout_marginBottom="50dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:background="@drawable/new_button_transparent"
-        android:textColor="#ffffff"/>
-
-    <Button
-        android:id="@+id/mainMenuToFavoritesButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/main_menu_to_favorites"
-        app:layout_constraintBottom_toTopOf="@id/mainMenuToAboutButton"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/mainMenuToSearchButton"
-        android:background="@drawable/new_button_transparent"
-        android:textColor="#ffffff"/>
-
-    <Button
-        android:id="@+id/mainMenuToAboutButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/main_menu_to_about"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/mainMenuToExitButton"
-        app:layout_constraintTop_toBottomOf="@id/mainMenuToFavoritesButton"
-        android:background="@drawable/new_button_transparent"
-        android:textColor="#ffffff"/>
-
-    <Button
-        android:id="@+id/mainMenuToExitButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/main_menu_to_exit"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mainMenuToAboutButton"
-        android:background="@drawable/new_button_transparent"
-        android:textColor="#ffffff"/>
-
-    <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
         >
 
-        <android.support.design.widget.BottomNavigationView
-            android:id="@+id/bottomNav"
+        <android.support.constraint.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentBottom="true"
-            app:menu="@menu/bottom_navigation_menu"
+            android:layout_height="wrap_content"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent">
 
-            android:background="#1aa260"
-            app:itemTextColor="@color/whiteHeart"
-            app:itemIconTint="@color/whiteHeart"
+            <Button
+                android:id="@+id/mainMenuToSearchButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70sp"
+                android:gravity="center"
+                android:text="@string/main_menu_to_search"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:background="@drawable/new_button_transparent"
+                android:textColor="#ffffff"/>
+
+            <Button
+                android:id="@+id/mainMenuToFavoritesButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70sp"
+                android:text="@string/main_menu_to_favorites"
+                app:layout_constraintBottom_toTopOf="@id/mainMenuToAboutButton"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainMenuToSearchButton"
+                android:background="@drawable/new_button_transparent"
+                android:textColor="#ffffff"/>
+
+            <Button
+                android:id="@+id/mainMenuToAboutButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70sp"
+                android:text="@string/main_menu_to_about"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/mainMenuToExitButton"
+                app:layout_constraintTop_toBottomOf="@id/mainMenuToFavoritesButton"
+                android:background="@drawable/new_button_transparent"
+                android:textColor="#ffffff"/>
+
+            <Button
+                android:id="@+id/mainMenuToExitButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="70sp"
+                android:text="@string/main_menu_to_exit"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/mainMenuToAboutButton"
+                android:background="@drawable/new_button_transparent"
+                android:textColor="#ffffff"/>
 
 
-            />
-    </RelativeLayout>
 
+        </android.support.constraint.ConstraintLayout>
+    </ScrollView>
 
+    <android.support.design.widget.BottomNavigationView
+
+        android:id="@+id/bottomNav"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom"
+        android:layout_marginTop="10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:menu="@menu/bottom_navigation_menu"
+        android:background="#1aa260"
+        app:itemTextColor="@color/whiteHeart"
+        app:itemIconTint="@color/whiteHeart"
+
+        />
 </android.support.constraint.ConstraintLayout>
+
+
+
+
+
 
 
 

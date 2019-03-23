@@ -146,7 +146,32 @@ public class MainMenuActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed(){
-        finish();
-        System.exit(0);
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
+
+        builder.setTitle("Confirm");
+        builder.setMessage("Are you sure that you want to exit?");
+
+        builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+
+            public void onClick(DialogInterface dialog, int which) {
+                finishAffinity();
+                System.exit(0);
+
+                dialog.dismiss();
+            }
+        });
+
+        builder.setNegativeButton("NO", new DialogInterface.OnClickListener() {
+
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+
+                // Do nothing
+                dialog.dismiss();
+            }
+        });
+
+        AlertDialog alert = builder.create();
+        alert.show();
     }
 }

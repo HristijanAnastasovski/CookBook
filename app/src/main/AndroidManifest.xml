@@ -8,9 +8,9 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_cook_book"
+        android:icon="@mipmap/ic_cook_book_green"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_cook_book_round"
+        android:roundIcon="@mipmap/ic_cook_book_green_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 

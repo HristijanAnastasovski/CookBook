@@ -39,8 +39,8 @@
 
             <Button
                 android:id="@+id/deleteSelectedIngredientButton"
-                android:layout_width="17dp"
-                android:layout_height="17dp"
+                android:layout_width="25dp"
+                android:layout_height="25dp"
                 android:layout_marginTop="8dp"
                 android:background="@android:drawable/ic_delete"
                 card_view:layout_constraintEnd_toEndOf="parent"

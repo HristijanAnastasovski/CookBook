@@ -151,7 +151,7 @@ public class RecipeDetailsOfflineActivity extends AppCompatActivity {
         authorNameTextView=(TextView) findViewById(R.id.authorNameTextViewOffline);
         tagTextView=(TextView) findViewById(R.id.ingredientsTextViewTagOffline);
         authorNameTextView.setText(recipe.getPublisher());
-        setTitle(recipe.getTitle());
+        setTitle(recipe.getTitle().replaceAll("&nbsp;"," ").replaceAll("&amp;","&"));
     }
 
     private void listInit()

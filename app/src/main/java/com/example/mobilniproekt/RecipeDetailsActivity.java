@@ -12,6 +12,7 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -49,6 +50,8 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import static java.security.AccessController.getContext;
+
 //Activity that shows all the details about the recipe (activates on recipe click)
 public class RecipeDetailsActivity extends AppCompatActivity {
 
@@ -58,7 +61,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     ProgressDialog progressDialog;
 
     private ImageView imageView;
-    private ImageView heartImage;
+   // private ImageView heartImage;
     private TextView authorNameTextView ;
     private Button fullGuideButton;
 
@@ -70,31 +73,78 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
     public static Semaphore semaphore1=new Semaphore(0);
     public static Semaphore semaphore2=new Semaphore(0);
+    private Toolbar toolbar;
+    private MenuItem btnFavorites=null;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.recipe_details);
         initBottomNavigation();
-        Intent intent = getIntent();
-        String id = intent.getStringExtra(getString(R.string.id_details));
+       // Intent intent = getIntent();
+       // String id = intent.getStringExtra(getString(R.string.id_details));
 
         imageView = findViewById(R.id.detailsImage);
-        heartImage=findViewById(R.id.imageViewHeart);
+        //heartImage=findViewById(R.id.imageViewHeart);
         authorNameTextView =findViewById(R.id.authorNameTextView);
         fullGuideButton = findViewById(R.id.buttonToFullRecipe);
+        toolbar = (Toolbar) findViewById(R.id.tool_bar);
+
 
         listInit();
-        getDetailsData(id);
+        //getDetailsData(id);
 
         database=new DatabseController(getApplicationContext());
     }
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.my_menu, menu);
-        return true;
 
-    }*/
+    @Override
+    protected void onStart() {
+        super.onStart();
+        Intent intent = getIntent();
+        String id = intent.getStringExtra(getString(R.string.id_details));
+        getDetailsData(id);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        // Inflate the menu; this adds items to the action bar if it is present.
+        getMenuInflater().inflate(R.menu.menu_main, menu);
+        btnFavorites=menu.findItem(R.id.button_favorite);
+
+        return true;
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        //noinspection SimplifiableIfStatement
+        if (id == R.id.button_favorite) {
+            RecipeModel model=setRecipeModel(recipe);
+            Toast toast=new Toast(getApplicationContext());
+            if(!isAdded) {
+                database.insertSingleRecipe(model);
+                database.insertDetailedRecipe(recipe);
+                isAdded=!isAdded;
+
+                toast.makeText(getApplicationContext(), "Recipe Successfully Added To My Favorites", Toast.LENGTH_LONG).show();
+                item.setIcon(R.drawable.ic_favorite_white_filled);
+            }
+            else {
+                database.removeRecipe(model);
+                database.removeDetailedRecipe(recipe);
+                isAdded=!isAdded;
+
+                toast.makeText(getApplicationContext(), "Recipe Successfully Removed From My Favorites", Toast.LENGTH_LONG).show();
+                item.setIcon(R.drawable.ic_favorite_white);
+            }
+        }
+
+        return super.onOptionsItemSelected(item);
+    }
 
     public void getDetailsData(String id)
     {
@@ -118,7 +168,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                         .apply(new RequestOptions().override(600, 400))
                         .into(imageView);
 
-                setTitle(response.body().getRecipeDetails().getTitle());
+                setTitle(response.body().getRecipeDetails().getTitle().replaceAll("&nbsp;"," ").replaceAll("&amp;","&"));
                 ingredientsAdapter.updateData(response.body().getRecipeDetails().getIngredients());
                 authorNameTextView.setText(response.body().getRecipeDetails().getPublisher());
                 fullGuideButton.setOnClickListener(new View.OnClickListener() {
@@ -136,7 +186,9 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 isAdded=database.checkIfExists(recipe);
 
                 if(isAdded) {
-                    heartImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.redHeart));
+                    if(btnFavorites!=null)
+                    btnFavorites.setIcon(R.drawable.ic_favorite_white_filled);
+                    //heartImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.redHeart));
                 }
 
                 progressDialog.dismiss();
@@ -148,7 +200,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
         });
 
-        heartImage.setOnClickListener(new View.OnClickListener() {
+      /*  heartImage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 RecipeModel model=setRecipeModel(recipe);
@@ -168,7 +220,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                     toast.makeText(getApplicationContext(), "Recipe Successfully Removed From My Favorites", Toast.LENGTH_LONG).show();
                 }
             }
-        });
+        });*/
     }
 
     private void listInit()

@@ -64,7 +64,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
                 .apply(new RequestOptions().override(600, 300))
                 .into(viewHolder.imageView);
 
-        viewHolder.title.setText(list.get(i).getTitle());
+        viewHolder.title.setText(list.get(i).getTitle().replaceAll("&nbsp;"," ").replaceAll("&amp;","&"));
 
         viewHolder.relativeLayout.setOnClickListener(new View.OnClickListener() {
             @Override

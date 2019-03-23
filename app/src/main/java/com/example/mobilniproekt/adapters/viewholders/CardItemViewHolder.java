@@ -44,7 +44,7 @@ public class CardItemViewHolder extends RecyclerView.ViewHolder{
                 .placeholder(R.drawable.ic_launcher_background)
                 .into(imageView);
                 */
-        titleTextView.setText(entity.getTitle());
+        titleTextView.setText(entity.getTitle().replaceAll("&nbsp;"," ").replaceAll("&amp;","&"));
 
         // ova da bide vo RecipeDetailsActivity
       /*  AddToList.setOnClickListener(new View.OnClickListener() {
