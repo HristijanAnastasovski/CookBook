@@ -145,7 +145,7 @@ public class RecipeDetailsOfflineActivity extends AppCompatActivity {
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .thumbnail(Glide.with(RecipeDetailsOfflineActivity.this)
                         .load(R.drawable.ic_launcher_background))
-                .apply(new RequestOptions().override(600, 400))
+                .apply(new RequestOptions().override(600, 600))
                 .into(imageView);
         authorTextView=(TextView) findViewById(R.id.authorTextViewOffline);
         authorNameTextView=(TextView) findViewById(R.id.authorNameTextViewOffline);

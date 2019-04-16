@@ -61,7 +61,7 @@ public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.View
         Glide.with(context)
                 .asBitmap()
                 .load(list.get(i).getImage_url())
-                .apply(new RequestOptions().override(600, 300))
+                .apply(new RequestOptions().override(600, 700))
                 .into(viewHolder.imageView);
 
         viewHolder.title.setText(list.get(i).getTitle().replaceAll("&nbsp;"," ").replaceAll("&amp;","&"));

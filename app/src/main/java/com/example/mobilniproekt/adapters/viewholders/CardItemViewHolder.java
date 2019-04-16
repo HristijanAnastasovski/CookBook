@@ -36,7 +36,7 @@ public class CardItemViewHolder extends RecyclerView.ViewHolder{
                 .transition(DrawableTransitionOptions.withCrossFade())
                 .thumbnail(Glide.with(imageView.getContext())
                         .load(R.drawable.ic_launcher_background))
-                .apply(new RequestOptions().override(600, 300))
+                .apply(new RequestOptions().override(600, 700))
                 .into(imageView);
     /*
         Picasso.with(itemView.getContext())

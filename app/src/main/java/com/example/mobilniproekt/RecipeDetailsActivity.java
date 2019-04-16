@@ -165,7 +165,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                         .transition(DrawableTransitionOptions.withCrossFade())
                         .thumbnail(Glide.with(RecipeDetailsActivity.this)
                                 .load(R.drawable.ic_launcher_background))
-                        .apply(new RequestOptions().override(600, 400))
+                        .apply(new RequestOptions().override(600, 600))
                         .into(imageView);
 
                 setTitle(response.body().getRecipeDetails().getTitle().replaceAll("&nbsp;"," ").replaceAll("&amp;","&"));
