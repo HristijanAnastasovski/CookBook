@@ -13,8 +13,11 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import com.example.mobilniproekt.room.RecipeDatabase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 import java.util.concurrent.Semaphore;
@@ -23,6 +26,7 @@ public class MainMenuActivity extends AppCompatActivity {
 
     private RecipeDatabase database;
     private static Semaphore semaphore=new Semaphore(0);
+    private FirebaseAuth mAuth;
 
 
     @Override
@@ -60,6 +64,7 @@ public class MainMenuActivity extends AppCompatActivity {
         Button btnToFavorites = findViewById(R.id.mainMenuToFavoritesButton);
         Button btnToAbout = findViewById(R.id.mainMenuToAboutButton);
         Button btnToExit= findViewById(R.id.mainMenuToExitButton);
+        mAuth = FirebaseAuth.getInstance();
 
         btnToSearch.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,14 +80,16 @@ public class MainMenuActivity extends AppCompatActivity {
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
 
                 builder.setTitle("Confirm");
-                builder.setMessage("Are you sure that you want to exit?");
+                builder.setMessage("Are you sure that you want to sign out?");
 
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        finishAffinity();
-                        System.exit(0);
+                        FirebaseAuth.getInstance().signOut();
 
+                        Intent intent=new Intent(MainMenuActivity.this,SignInOptionsActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        startActivity(intent);
                         dialog.dismiss();
                     }
                 });
@@ -119,6 +126,22 @@ public class MainMenuActivity extends AppCompatActivity {
         });
     }
 
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+        try {
+            Toast.makeText(MainMenuActivity.this, "Welcome " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception e)
+        {
+            Toast.makeText(MainMenuActivity.this, "Internal error", Toast.LENGTH_SHORT).show();
+        }
+
+    }
+
     public void initBottomNavigation()
     {
         BottomNavigationView bottomNavigationView = (BottomNavigationView) findViewById(R.id.bottomNav);
@@ -143,6 +166,8 @@ public class MainMenuActivity extends AppCompatActivity {
             }
         });
     }
+
+
 
     @Override
     public void onBackPressed(){

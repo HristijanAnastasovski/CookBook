@@ -4,6 +4,7 @@
     <string name="main_menu_to_search">SEARCH FOR RECIPES</string>
     <string name="main_menu_to_favorites">MY FAVORITE RECIPES</string>
     <string name="main_menu_to_about">ABOUT US</string>
+    <string name="main_menu_sign_out">SIGN OUT</string>
     <string name="main_menu_to_exit">EXIT</string>
     <string name="ingredient">Ingredient: </string>
     <string name="searchBy">Search by:</string>
@@ -19,5 +20,7 @@
     <string name="developedBy">- Hristijan Anastasovski \n- Ljuben Angelkoski </string>
     <string name="contactHristijan">anastasovski.h@gmail.com</string>
     <string name="contactLjuben">ljuben_angelkoski@live.com</string>
+    <string name="signUpMessage">Not a member yet? <u>Sign up for free</u>!</string>
+
 
 </resources>
