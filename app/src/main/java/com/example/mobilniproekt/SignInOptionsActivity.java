@@ -2,30 +2,94 @@ package com.example.mobilniproekt;
 
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.Signature;
 import android.os.Bundle;
+import android.os.Trace;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Base64;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.facebook.AccessToken;
+import com.facebook.CallbackManager;
+import com.facebook.FacebookCallback;
+import com.facebook.FacebookException;
+import com.facebook.FacebookSdk;
+import com.facebook.login.LoginManager;
+import com.facebook.login.LoginResult;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.EmailAuthProvider;
+import com.google.firebase.auth.FacebookAuthProvider;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseAuthUserCollisionException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.SignInMethodQueryResult;
+
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.util.Arrays;
+import java.util.List;
+
 public class SignInOptionsActivity extends AppCompatActivity {
     public LinearLayout signUpLink;
     public LinearLayout signInWithMail;
+    public LinearLayout continueAsGuest;
+    public CallbackManager mCallbackManager;
+    public LinearLayout signInWithFacebook;
+    public FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_in_options_layout);
 
+        Get_hash_key();
         signUpLink = findViewById(R.id.signUpText);
         signUpLink.setClickable(true);
 
         signInWithMail = findViewById(R.id.signInWithMail);
         signInWithMail.setClickable(true);
 
+        continueAsGuest = findViewById(R.id.continueAsGuest);
+        continueAsGuest.setClickable(true);
+
+        signInWithFacebook = findViewById(R.id.signInWithFacebook);
+        signInWithFacebook.setClickable(true);
+
+        mAuth = FirebaseAuth.getInstance();
+        mCallbackManager = CallbackManager.Factory.create();
+
+
+        //to sign in with mail activity
+        signInWithMail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent toSignInWithMail = new Intent(SignInOptionsActivity.this,SignInWithMailActivity.class);
+                startActivity(toSignInWithMail);
+            }
+        });
+
+        continueAsGuest.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent continueAsGuestIntent = new Intent (SignInOptionsActivity.this,MainMenuActivity.class);
+                FirebaseAuth.getInstance().signOut();
+                startActivity(continueAsGuestIntent);
+            }
+        });
+
+        //to sign up activity
         signUpLink.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -34,14 +98,147 @@ public class SignInOptionsActivity extends AppCompatActivity {
             }
         });
 
-        signInWithMail.setOnClickListener(new View.OnClickListener() {
+
+        signInWithFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent toSignInWithMail = new Intent(SignInOptionsActivity.this,SignInWithMailActivity.class);
-                startActivity(toSignInWithMail);
+                LoginManager.getInstance().logInWithReadPermissions(SignInOptionsActivity.this, Arrays.asList("email","public_profile"));
+                LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
+                    @Override
+                    public void onSuccess(LoginResult loginResult) {
+                        handleFacebookAccessToken(loginResult.getAccessToken());
+
+                    }
+
+                    @Override
+                    public void onCancel() {
+                        Toast.makeText(SignInOptionsActivity.this, "Authentication cancelled.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(FacebookException error) {
+                        Toast.makeText(SignInOptionsActivity.this, "Authentication error.",
+                                Toast.LENGTH_SHORT).show();
+                    }
+                });
+            }
+        });
+
+
+
+    }
+
+
+    public void Get_hash_key() {
+        PackageInfo info;
+        try {
+            info = getPackageManager().getPackageInfo("com.example.mobilniproekt", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                //String something = new String(Base64.encodeBytes(md.digest()));
+                Log.e("hash key", something);
+            }
+        } catch (PackageManager.NameNotFoundException e1) {
+            Log.e("name not found", e1.toString());
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("no such an algorithm", e.toString());
+        } catch (Exception e) {
+            Log.e("exception", e.toString());
+        }
+    }
+
+
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        // Pass the activity result back to the Facebook SDK
+        mCallbackManager.onActivityResult(requestCode, resultCode, data);
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        // Check if user is signed in (non-null) and update UI accordingly.
+        FirebaseUser currentUser = mAuth.getCurrentUser();
+
+    }
+
+    private void handleFacebookAccessToken(AccessToken token) {
+        //Log.d(TAG, "handleFacebookAccessToken:" + token);
+
+        AuthCredential credential = FacebookAuthProvider.getCredential(token.getToken());
+
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+
+
+
+// Prompt the user to re-provide their sign-in credentials
+
+
+
+
+
+        mAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.e("success","successful login");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(SignInOptionsActivity.this, "Authentication successful.",
+                                    Toast.LENGTH_SHORT).show();
+                            Intent logInWithFacebookIntent = new Intent (SignInOptionsActivity.this,MainMenuActivity.class);
+                            startActivity(logInWithFacebookIntent);
+
+                        } else {
+                            // If sign in fails, display a message to the user./Log.w(TAG, "signInWithCredential:failure", task.getException());
+                            Log.e("signInWithCredential", task.getException().toString());
+                            Toast.makeText(getApplicationContext(), "Firebase Facebook login failed",
+                                    Toast.LENGTH_SHORT).show();
+
+                            if(task.getException() instanceof FirebaseAuthUserCollisionException) {
+                                Toast.makeText(getApplicationContext(), "Account with same Email already exists.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                            LoginManager.getInstance().logOut();
+
+
+                        }
+
+
+                        // ...
+                    }
+                });
+
+
+    }
+
+
+    public void checkIfEmailExists(String mail)
+    {
+        mAuth.fetchSignInMethodsForEmail(mail).addOnCompleteListener(new OnCompleteListener<SignInMethodQueryResult>() {
+            @Override
+            public void onComplete(@NonNull Task<SignInMethodQueryResult> task) {
+                boolean check = !task.getResult().getSignInMethods().isEmpty();
+
+                if(!check){
+                    Toast.makeText(getApplicationContext(),"Email not found",Toast.LENGTH_LONG).show();
+                }else
+                {
+                    Toast.makeText(getApplicationContext(),"Email found",Toast.LENGTH_LONG).show();
+                }
             }
         });
     }
+
 
     @Override
     public void onBackPressed(){
@@ -73,4 +270,5 @@ public class SignInOptionsActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
 }

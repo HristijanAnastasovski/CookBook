@@ -29,6 +29,7 @@ public interface DaoAccess {
     void deleteRecipe (RecipeModel recipe);
     @Query("SELECT * FROM RecipeModel")
     List<RecipeModel> getAllRecipes();
+
     @Query("SELECT * FROM RecipeModel WHERE recipe_id= :recipeID LIMIT 1")
     RecipeModel getOneRecipe(String recipeID);
 

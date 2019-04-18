@@ -27,6 +27,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private RecipeDatabase database;
     private static Semaphore semaphore=new Semaphore(0);
     private FirebaseAuth mAuth;
+    private boolean userLoggedIn;
 
 
     @Override
@@ -66,6 +67,19 @@ public class MainMenuActivity extends AppCompatActivity {
         Button btnToExit= findViewById(R.id.mainMenuToExitButton);
         mAuth = FirebaseAuth.getInstance();
 
+        if(mAuth.getCurrentUser()==null) {
+            userLoggedIn = false;
+            btnToExit.setText(R.string.signIn);
+        }
+        else {
+            userLoggedIn = true;
+            btnToExit.setText(R.string.main_menu_sign_out);
+        }
+
+
+
+
+
         btnToSearch.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -77,6 +91,15 @@ public class MainMenuActivity extends AppCompatActivity {
         btnToExit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if(!userLoggedIn)
+                {
+                    FirebaseAuth.getInstance().signOut();
+
+                    Intent intent=new Intent(MainMenuActivity.this,SignInOptionsActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    return;
+                }
                 AlertDialog.Builder builder = new AlertDialog.Builder(MainMenuActivity.this);
 
                 builder.setTitle("Confirm");
@@ -133,11 +156,12 @@ public class MainMenuActivity extends AppCompatActivity {
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         try {
+
             Toast.makeText(MainMenuActivity.this, "Welcome " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
         }
         catch (Exception e)
         {
-            Toast.makeText(MainMenuActivity.this, "Internal error", Toast.LENGTH_SHORT).show();
+            Toast.makeText(MainMenuActivity.this, "Welcome guest", Toast.LENGTH_SHORT).show();
         }
 
     }

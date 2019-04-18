@@ -200,27 +200,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
             }
         });
 
-      /*  heartImage.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                RecipeModel model=setRecipeModel(recipe);
-                Toast toast=new Toast(getApplicationContext());
-                if(!isAdded) {
-                    database.insertSingleRecipe(model);
-                    database.insertDetailedRecipe(recipe);
-                    isAdded=!isAdded;
-                    heartImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.redHeart));
-                    toast.makeText(getApplicationContext(), "Recipe Successfully Added To My Favorites", Toast.LENGTH_LONG).show();
-                }
-                else {
-                    database.removeRecipe(model);
-                    database.removeDetailedRecipe(recipe);
-                    isAdded=!isAdded;
-                    heartImage.setColorFilter(getApplicationContext().getResources().getColor(R.color.whiteHeart));
-                    toast.makeText(getApplicationContext(), "Recipe Successfully Removed From My Favorites", Toast.LENGTH_LONG).show();
-                }
-            }
-        });*/
     }
 
     private void listInit()

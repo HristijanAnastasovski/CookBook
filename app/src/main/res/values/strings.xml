@@ -21,6 +21,10 @@
     <string name="contactHristijan">anastasovski.h@gmail.com</string>
     <string name="contactLjuben">ljuben_angelkoski@live.com</string>
     <string name="signUpMessage">Not a member yet? <u>Sign up for free</u>!</string>
+    <string name="signIn">SIGN IN</string>
+    <string name="facebook_app_id">352522795382883</string>
+    <string name="fb_login_protocol_scheme">fb352522795382883</string>
+
 
 
 </resources>

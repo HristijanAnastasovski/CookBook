@@ -73,6 +73,7 @@ public class SignInWithMailActivity extends AppCompatActivity {
                                     } else {
                                         // If sign in fails, display a message to the user.
                                         progressDialog.hide();
+
                                         emailLayout.setError("Invalid username or password");
                                         passwordLayout.setError("Invalid username or password");
                                         Toast.makeText(SignInWithMailActivity.this, "Authentication failed.",
