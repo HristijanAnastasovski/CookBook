@@ -14,6 +14,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mobilniproekt.adapters.FavoritesAdapter;
@@ -30,6 +32,8 @@ public class FavoritesActivity extends AppCompatActivity {
     private List<RecipeModel> recipeModelList;
     private RecyclerView recyclerView;
     private FavoritesAdapter favoritesAdapter;
+    private ImageView sadChefImage;
+    private TextView noFavoritesText;
     public static Semaphore semaphore=new Semaphore(0);
     public static Semaphore semaphoreList=new Semaphore(0);
 
@@ -44,6 +48,15 @@ public class FavoritesActivity extends AppCompatActivity {
         recipeModelList=database.getAllRecipes();
 
         initRecyclerView();
+
+        if(recipeModelList.isEmpty())
+        {
+            sadChefImage = findViewById(R.id.sadChefImageViewFavorites);
+            sadChefImage.setVisibility(View.VISIBLE);
+
+            noFavoritesText = findViewById(R.id.noRecipesTextViewFavorites);
+            noFavoritesText.setVisibility(View.VISIBLE);
+        }
 
     }
 

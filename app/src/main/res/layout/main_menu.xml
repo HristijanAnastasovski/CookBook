@@ -8,102 +8,133 @@
     android:scaleType="fitXY">
 
 
-
-
-    <ScrollView
-        android:id="@+id/scrollView2"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-
-        android:layout_marginBottom="50dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        >
-
-        <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent">
-
             <Button
                 android:id="@+id/mainMenuToSearchButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70sp"
+                android:background="@drawable/new_button_transparent"
                 android:gravity="center"
                 android:text="@string/main_menu_to_search"
+                android:textColor="#ffffff"
+                app:layout_constraintBottom_toTopOf="@+id/MainMenuGuideline2"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:background="@drawable/new_button_transparent"
-                android:textColor="#ffffff"/>
+                app:layout_constraintTop_toTopOf="@id/MainMenuGuideline1" />
 
             <Button
                 android:id="@+id/mainMenuToFavoritesButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70sp"
-                android:text="@string/main_menu_to_favorites"
-                app:layout_constraintBottom_toTopOf="@id/mainMenuToAboutButton"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/mainMenuToSearchButton"
                 android:background="@drawable/new_button_transparent"
-                android:textColor="#ffffff"/>
+                android:text="@string/main_menu_to_favorites"
+                android:textColor="#ffffff"
+                app:layout_constraintBottom_toTopOf="@+id/MainMenuGuideline3"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/MainMenuGuideline2"/>
 
             <Button
                 android:id="@+id/mainMenuToAboutButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70sp"
-                android:text="@string/main_menu_to_about"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toTopOf="@id/mainMenuToExitButton"
-                app:layout_constraintTop_toBottomOf="@id/mainMenuToFavoritesButton"
                 android:background="@drawable/new_button_transparent"
-                android:textColor="#ffffff"/>
+                android:text="@string/main_menu_to_about"
+                android:textColor="#ffffff"
+                app:layout_constraintBottom_toTopOf="@+id/MainMenuGuideline4"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/MainMenuGuideline3"/>
 
             <Button
                 android:id="@+id/mainMenuToExitButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="70sp"
-                android:text="@string/main_menu_sign_out"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/mainMenuToAboutButton"
                 android:background="@drawable/new_button_transparent"
-                android:textColor="#ffffff"/>
+                android:text="@string/main_menu_sign_out"
+                android:textColor="#ffffff"
+                tools:layout_editor_absoluteX="71dp"
+                tools:layout_editor_absoluteY="460dp"
+                app:layout_constraintBottom_toTopOf="@+id/MainMenuGuideline5"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/MainMenuGuideline4"
+                />
 
-
-
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
 
     <android.support.design.widget.BottomNavigationView
 
         android:id="@+id/bottomNav"
         android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_gravity="bottom"
-        android:layout_marginTop="10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:menu="@menu/bottom_navigation_menu"
+
         android:background="#1aa260"
-        app:itemTextColor="@color/whiteHeart"
         app:itemIconTint="@color/whiteHeart"
+        app:itemTextColor="@color/whiteHeart"
+        app:menu="@menu/bottom_navigation_menu"
+        app:layout_constraintBottom_toTopOf="@+id/MainMenuGuideline6"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
 
         />
-</android.support.constraint.ConstraintLayout>
+
+            <android.support.constraint.Guideline
+                android:id="@+id/MainMenuGuideline1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.0"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/MainMenuGuideline2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.22"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/MainMenuGuideline3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.44"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/MainMenuGuideline4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.66"
+                app:layout_constraintGuide_begin="20dp" />
+
+
+            <android.support.constraint.Guideline
+                android:id="@+id/MainMenuGuideline5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.88"
+                app:layout_constraintGuide_begin="20dp" />
+
+            <android.support.constraint.Guideline
+                android:id="@+id/MainMenuGuideline6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="1.0"
+                app:layout_constraintGuide_begin="20dp" />
+
+
+
+
+        </android.support.constraint.ConstraintLayout>
+
+
+
+
+
 
 
 

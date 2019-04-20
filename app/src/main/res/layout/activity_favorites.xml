@@ -16,6 +16,34 @@
         android:layout_marginBottom="50dp"
        ></android.support.v7.widget.RecyclerView>
 
+    <TextView
+        android:id="@+id/noRecipesTextViewFavorites"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="20dp"
+        android:text="There are no favorite recipes in your list"
+        android:textSize="15sp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/sadChefImageViewFavorites"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+    <ImageView
+        android:id="@+id/sadChefImageViewFavorites"
+        android:layout_width="243dp"
+        android:layout_height="432dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/sad_chef"
+        android:contentDescription="@string/sadChef"
+        android:visibility="invisible"/>
 
     <android.support.design.widget.BottomNavigationView
 

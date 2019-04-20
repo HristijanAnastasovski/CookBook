@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.FirebaseNetworkException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthUserCollisionException;
@@ -64,14 +65,21 @@ public class SignUpActivity extends AppCompatActivity {
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         Intent intentToMainMenu = new Intent(SignUpActivity.this,MainMenuActivity.class);
                                         startActivity(intentToMainMenu);
+
+                                        Toast.makeText(SignUpActivity.this, "Welcome "+user.getEmail().split("@")[0],
+                                                Toast.LENGTH_LONG).show();
                                         //updateUI(user);
                                     } else {
+
                                         // If sign in fails, display a message to the user.
                                         if(task.getException() instanceof FirebaseAuthUserCollisionException) {
                                             emailLayout.setError("Account already exists.");
-                                        }else
+                                        }else if(task.getException() instanceof FirebaseNetworkException){
+                                            Toast.makeText(SignUpActivity.this, "Internet connection problem.",
+                                                    Toast.LENGTH_SHORT).show();
+                                        }else{
                                         Toast.makeText(SignUpActivity.this, "Authentication failed.",
-                                                Toast.LENGTH_SHORT).show();
+                                                Toast.LENGTH_SHORT).show();}
                                        // updateUI(null);
                                     }
 

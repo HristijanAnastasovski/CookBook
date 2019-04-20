@@ -65,6 +65,7 @@ public class MainMenuActivity extends AppCompatActivity {
         Button btnToFavorites = findViewById(R.id.mainMenuToFavoritesButton);
         Button btnToAbout = findViewById(R.id.mainMenuToAboutButton);
         Button btnToExit= findViewById(R.id.mainMenuToExitButton);
+
         mAuth = FirebaseAuth.getInstance();
 
         if(mAuth.getCurrentUser()==null) {
@@ -155,14 +156,14 @@ public class MainMenuActivity extends AppCompatActivity {
         super.onStart();
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
-        try {
+       /* try {
 
             Toast.makeText(MainMenuActivity.this, "Welcome " + currentUser.getEmail(), Toast.LENGTH_SHORT).show();
         }
         catch (Exception e)
         {
             Toast.makeText(MainMenuActivity.this, "Welcome guest", Toast.LENGTH_SHORT).show();
-        }
+        }*/
 
     }
 

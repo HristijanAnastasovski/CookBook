@@ -86,6 +86,8 @@ public class SignInOptionsActivity extends AppCompatActivity {
                 Intent continueAsGuestIntent = new Intent (SignInOptionsActivity.this,MainMenuActivity.class);
                 FirebaseAuth.getInstance().signOut();
                 startActivity(continueAsGuestIntent);
+                Toast.makeText(SignInOptionsActivity.this, "Welcome guest",
+                        Toast.LENGTH_LONG).show();
             }
         });
 
@@ -118,6 +120,10 @@ public class SignInOptionsActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(FacebookException error) {
+                        if(error.toString().equals("CONNECTION_FAILURE: CONNECTION_FAILURE"))
+                            Toast.makeText(SignInOptionsActivity.this, "Internet connection problem.",
+                                    Toast.LENGTH_SHORT).show();
+                        else
                         Toast.makeText(SignInOptionsActivity.this, "Authentication error.",
                                 Toast.LENGTH_SHORT).show();
                     }
@@ -130,26 +136,6 @@ public class SignInOptionsActivity extends AppCompatActivity {
     }
 
 
-    public void Get_hash_key() {
-        PackageInfo info;
-        try {
-            info = getPackageManager().getPackageInfo("com.example.mobilniproekt", PackageManager.GET_SIGNATURES);
-            for (Signature signature : info.signatures) {
-                MessageDigest md;
-                md = MessageDigest.getInstance("SHA");
-                md.update(signature.toByteArray());
-                String something = new String(Base64.encode(md.digest(), 0));
-                //String something = new String(Base64.encodeBytes(md.digest()));
-                Log.e("hash key", something);
-            }
-        } catch (PackageManager.NameNotFoundException e1) {
-            Log.e("name not found", e1.toString());
-        } catch (NoSuchAlgorithmException e) {
-            Log.e("no such an algorithm", e.toString());
-        } catch (Exception e) {
-            Log.e("exception", e.toString());
-        }
-    }
 
 
 
@@ -197,6 +183,8 @@ public class SignInOptionsActivity extends AppCompatActivity {
                                     Toast.LENGTH_SHORT).show();
                             Intent logInWithFacebookIntent = new Intent (SignInOptionsActivity.this,MainMenuActivity.class);
                             startActivity(logInWithFacebookIntent);
+                            Toast.makeText(SignInOptionsActivity.this, "Welcome "+user.getEmail().split("@")[0],
+                                    Toast.LENGTH_LONG).show();
 
                         } else {
                             // If sign in fails, display a message to the user./Log.w(TAG, "signInWithCredential:failure", task.getException());
@@ -270,5 +258,28 @@ public class SignInOptionsActivity extends AppCompatActivity {
         AlertDialog alert = builder.create();
         alert.show();
     }
+
+
+    public void Get_hash_key() {
+        PackageInfo info;
+        try {
+            info = getPackageManager().getPackageInfo("com.example.mobilniproekt", PackageManager.GET_SIGNATURES);
+            for (Signature signature : info.signatures) {
+                MessageDigest md;
+                md = MessageDigest.getInstance("SHA");
+                md.update(signature.toByteArray());
+                String something = new String(Base64.encode(md.digest(), 0));
+                //String something = new String(Base64.encodeBytes(md.digest()));
+                Log.e("hash key", something);
+            }
+        } catch (PackageManager.NameNotFoundException e1) {
+            Log.e("name not found", e1.toString());
+        } catch (NoSuchAlgorithmException e) {
+            Log.e("no such an algorithm", e.toString());
+        } catch (Exception e) {
+            Log.e("exception", e.toString());
+        }
+    }
+
 
 }
