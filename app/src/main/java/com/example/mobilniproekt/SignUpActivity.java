@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.example.mobilniproekt.room.DatabseController;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
@@ -33,7 +34,6 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputLayout passwordLayout;
     private TextInputLayout rePasswordLayout;
     private FirebaseAuth mAuth;
-    boolean accountExist;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {

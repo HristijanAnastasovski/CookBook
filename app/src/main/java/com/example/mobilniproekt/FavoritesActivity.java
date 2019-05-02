@@ -19,9 +19,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.mobilniproekt.adapters.FavoritesAdapter;
+import com.example.mobilniproekt.model.RecipeDetails;
 import com.example.mobilniproekt.room.DatabseController;
 import com.example.mobilniproekt.room.RecipeDatabase;
 import com.example.mobilniproekt.room.RecipeModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.List;
 import java.util.concurrent.Semaphore;
@@ -29,11 +32,13 @@ import java.util.concurrent.Semaphore;
 public class FavoritesActivity extends AppCompatActivity {
 
     private DatabseController database;
-    private List<RecipeModel> recipeModelList;
+    private List<RecipeDetails> recipeModelList;
     private RecyclerView recyclerView;
     private FavoritesAdapter favoritesAdapter;
     private ImageView sadChefImage;
     private TextView noFavoritesText;
+    private FirebaseAuth firebaseAuth;
+    private String user;
     public static Semaphore semaphore=new Semaphore(0);
     public static Semaphore semaphoreList=new Semaphore(0);
 
@@ -42,10 +47,22 @@ public class FavoritesActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_favorites);
         initBottomNavigation();
+
+        firebaseAuth=FirebaseAuth.getInstance();
+        FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
+        if(firebaseUser==null) user="guest";
+        else user=firebaseUser.getEmail();
+
         database=new DatabseController(getApplicationContext());
         semaphore.release();
 
-        recipeModelList=database.getAllRecipes();
+        Log.d("user", user);
+
+        recipeModelList=database.getAllRecipes(user);
+
+        for(RecipeDetails recipeDetails:recipeModelList){
+            Log.d("name", recipeDetails.getTitle());
+        }
 
         initRecyclerView();
 

@@ -39,6 +39,8 @@ import com.example.mobilniproekt.room.DatabseController;
 import com.example.mobilniproekt.room.MappingModel;
 import com.example.mobilniproekt.room.RecipeDatabase;
 import com.example.mobilniproekt.room.RecipeModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import org.w3c.dom.Text;
 
@@ -64,6 +66,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
    // private ImageView heartImage;
     private TextView authorNameTextView ;
     private Button fullGuideButton;
+    private FirebaseAuth firebaseAuth;
 
     private DatabseController database;
 
@@ -90,6 +93,7 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         authorNameTextView =findViewById(R.id.authorNameTextView);
         fullGuideButton = findViewById(R.id.buttonToFullRecipe);
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
+        firebaseAuth=FirebaseAuth.getInstance();
 
 
         listInit();
@@ -123,10 +127,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
         //noinspection SimplifiableIfStatement
         if (id == R.id.button_favorite) {
-            RecipeModel model=setRecipeModel(recipe);
             Toast toast=new Toast(getApplicationContext());
             if(!isAdded) {
-                database.insertSingleRecipe(model);
                 database.insertDetailedRecipe(recipe);
                 isAdded=!isAdded;
 
@@ -134,7 +136,6 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 item.setIcon(R.drawable.ic_favorite_red_filled);
             }
             else {
-                database.removeRecipe(model);
                 database.removeDetailedRecipe(recipe);
                 isAdded=!isAdded;
 
@@ -183,7 +184,13 @@ public class RecipeDetailsActivity extends AppCompatActivity {
 
                 semaphore1.release();
 
+                FirebaseUser user=firebaseAuth.getCurrentUser();
+                if (user==null) recipe.setUser("guest");
+                else recipe.setUser(user.getEmail());
+                recipe.setRecipe_id(recipe.getRecipe_id()+recipe.getUser());
+
                 isAdded=database.checkIfExists(recipe);
+                Log.d("is added", Boolean.toString(isAdded));
 
                 if(isAdded) {
                     if(btnFavorites!=null)

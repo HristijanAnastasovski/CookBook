@@ -23,7 +23,7 @@ public class DatabseController {
     private Semaphore semaphoreForSingleRecipe;
     private static RecipeDatabase recipeDatabase;
     private boolean isAdded;
-    private List<RecipeModel> recipes;
+    private List<RecipeDetails> recipes;
     private RecipeDetails recipeDetails;
     private RecipeModel recipeModel;
     private List<String> ingreedients;
@@ -98,7 +98,19 @@ public class DatabseController {
         }.execute();
     }
 
-    public List<RecipeModel> getAllRecipes(){
+    public static void nuke() {
+        new AsyncTask<Void, Void, Void>() {
+            @Override
+            protected Void doInBackground(Void... voids) {
+                recipeDatabase.daoAccess().nukeDetails();
+                recipeDatabase.daoAccess().nukeRecipes();
+                recipeDatabase.daoAccess().nukeMappings();
+                return null;
+            }
+        }.execute();
+    }
+
+    public List<RecipeDetails> getAllRecipes(String user){
         new Thread(new Runnable() {
             @Override
             public void run() {
@@ -107,7 +119,7 @@ public class DatabseController {
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                recipes=recipeDatabase.daoAccess().getAllRecipes();
+                recipes=recipeDatabase.daoAccess().getMultipleDetailedRecipes(user);
                 semaphoreList.release();
             }
         }).start();
@@ -170,19 +182,17 @@ public class DatabseController {
     }
 
     public boolean checkIfExists(RecipeDetails recipe){
+        Log.d("RecipeID", recipe.getRecipe_id());
         new Thread(new Runnable() {
             @Override
             public void run() {
-                Log.d("tag", "Starting Thread");
                 try {
                     semaphore1.acquire();
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
-                Log.d("tag", "Ending Thread");
-                Log.d("tag", "recipeID"+recipe.getRecipe_id());
-                RecipeModel recipeModel=recipeDatabase.daoAccess().getOneRecipe(recipe.getRecipe_id());
-                if(recipeModel==null) isAdded=false;
+                RecipeDetails recipeModel=recipeDatabase.daoAccess().getOneDetailedRecipe(recipe.getRecipe_id());
+                if (recipeModel==null) isAdded=false;
                 else isAdded=true;
                 semaphore2.release();
             }

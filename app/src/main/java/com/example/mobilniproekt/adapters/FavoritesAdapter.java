@@ -17,6 +17,7 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.request.RequestOptions;
 import com.example.mobilniproekt.R;
 import com.example.mobilniproekt.RecipeDetailsOfflineActivity;
+import com.example.mobilniproekt.model.RecipeDetails;
 import com.example.mobilniproekt.room.RecipeModel;
 
 import java.util.List;
@@ -25,11 +26,11 @@ import de.hdodenhof.circleimageview.CircleImageView;
 
 public class FavoritesAdapter extends RecyclerView.Adapter<FavoritesAdapter.ViewHolder>{
 
-    private List<RecipeModel> list;
+    private List<RecipeDetails> list;
     private Activity context;
     private int position;
 
-    public FavoritesAdapter(List<RecipeModel> list, Activity context) {
+    public FavoritesAdapter(List<RecipeDetails> list, Activity context) {
         this.list = list;
         this.context = context;
     }

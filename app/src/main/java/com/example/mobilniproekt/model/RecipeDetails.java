@@ -42,6 +42,17 @@ public class RecipeDetails {
     @SerializedName("ingredients")
     private List<String> ingredients;
 
+    @SerializedName("user")
+    private String user;
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
+    }
+
     public List<String> getIngredients() {
         return ingredients;
     }

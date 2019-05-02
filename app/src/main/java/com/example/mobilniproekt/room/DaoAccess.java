@@ -43,6 +43,8 @@ public interface DaoAccess {
     void deleteRecipeDetails (RecipeDetails recipe);
     @Query("SELECT * FROM RecipeDetails WHERE recipe_id= :recipeID LIMIT 1")
     RecipeDetails getOneDetailedRecipe(String recipeID);
+    @Query("SELECT * FROM RecipeDetails WHERE user= :user")
+    List<RecipeDetails> getMultipleDetailedRecipes(String user);
 
     @Insert
     void insertMultipleMappings(List<MappingModel> mappings);

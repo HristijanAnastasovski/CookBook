@@ -27,6 +27,8 @@ import com.example.mobilniproekt.room.DatabseController;
 import com.example.mobilniproekt.room.MappingModel;
 import com.example.mobilniproekt.room.RecipeDatabase;
 import com.example.mobilniproekt.room.RecipeModel;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -38,7 +40,6 @@ public class RecipeDetailsOfflineActivity extends AppCompatActivity {
     private String recipeID;
     private RecipeDetails recipe;
     private Button removeFromFavorites;
-    private RecipeModel recipeModel;
 
     private RecyclerView recyclerView;
     private IngredientsAdapter ingredientsAdapter;
@@ -49,6 +50,9 @@ public class RecipeDetailsOfflineActivity extends AppCompatActivity {
     private TextView tagTextView;
     private TextView authorTextView;
     private Button fullGuideButton;
+    private String user;
+
+    private FirebaseAuth firebaseAuth;
 
     private List<String> ingreedients;
 
@@ -68,13 +72,16 @@ public class RecipeDetailsOfflineActivity extends AppCompatActivity {
         database.initSemaphoreForMapping();
         database.initSemaphoreForSingleRecipe();
 
-        Log.d("message", mainIntent.getStringExtra("position"));
+        firebaseAuth=FirebaseAuth.getInstance();
+
+        FirebaseUser firebaseUser=firebaseAuth.getCurrentUser();
+        if (firebaseUser==null) user="guest";
+        else user=firebaseUser.getEmail();
 
         removeFromFavorites=(Button) findViewById(R.id.buttonToRemoveOffline);
 
         listInit();
         try {
-            recipeModel=database.getOneRecipe(recipeID);
             recipe=database.getOneDetailedRecipe(recipeID);
             semaphore.release();
         } catch (InterruptedException e) {
@@ -105,7 +112,6 @@ public class RecipeDetailsOfflineActivity extends AppCompatActivity {
                 builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
 
                     public void onClick(DialogInterface dialog, int which) {
-                        database.removeRecipe(recipeModel);
                         database.removeDetailedRecipe(recipe);
                         Intent intent=new Intent();
                         intent.putExtra("remove", "yes");
