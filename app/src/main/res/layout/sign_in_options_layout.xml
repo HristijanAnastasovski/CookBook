@@ -14,20 +14,20 @@
         android:id="@+id/cookBookLogo"
         android:layout_width="350dp"
         android:layout_height="150dp"
-        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline2"
+        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline1"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/LoginOptionsGuideline1"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/cookbook_signup_logo" />
 
     <LinearLayout
         android:id="@+id/signInWithMail"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline3"
+        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/LoginOptionsGuideline2"
+        app:layout_constraintTop_toTopOf="@id/LoginOptionsGuideline1"
         android:orientation="horizontal"
         android:background="@drawable/mail_button"
         android:clickable="true"
@@ -61,7 +61,7 @@
         android:id="@+id/signInWithFacebook"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline4"
+        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@id/LoginOptionsGuideline3"
@@ -96,10 +96,10 @@
         android:id="@+id/continueAsGuest"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline5"
+        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline4"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/LoginOptionsGuideline4"
+        app:layout_constraintTop_toTopOf="@id/LoginOptionsGuideline3"
         android:background="@drawable/guest_button"
         android:orientation="horizontal"
         android:clickable="true"
@@ -130,10 +130,10 @@
         android:id="@+id/signUpText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline6"
+        app:layout_constraintBottom_toTopOf="@+id/LoginOptionsGuideline5"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@id/LoginOptionsGuideline5"
+        app:layout_constraintTop_toTopOf="@id/LoginOptionsGuideline4"
         android:clickable="true"
         android:focusable="true">
         <TextView
@@ -152,7 +152,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.07"
+        app:layout_constraintGuide_percent="0.25"
         app:layout_constraintGuide_begin="20dp" />
 
     <android.support.constraint.Guideline
@@ -160,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.32"
+        app:layout_constraintGuide_percent="0.40"
         app:layout_constraintGuide_begin="20dp" />
 
     <android.support.constraint.Guideline
@@ -168,7 +168,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.47"
+        app:layout_constraintGuide_percent="0.55"
         app:layout_constraintGuide_begin="20dp" />
 
     <android.support.constraint.Guideline
@@ -176,7 +176,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.62"
+        app:layout_constraintGuide_percent="0.70"
         app:layout_constraintGuide_begin="20dp" />
 
 
@@ -185,15 +185,25 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.77"
+        app:layout_constraintGuide_percent="0.80"
         app:layout_constraintGuide_begin="20dp" />
 
-    <android.support.constraint.Guideline
-        android:id="@+id/LoginOptionsGuideline6"
+
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.92"
-        app:layout_constraintGuide_begin="20dp" />
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+    </com.google.android.gms.ads.AdView>
+
+
 
 </android.support.constraint.ConstraintLayout>

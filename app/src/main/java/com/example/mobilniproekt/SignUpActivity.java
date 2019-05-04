@@ -13,6 +13,8 @@ import android.widget.EditText;
 import android.widget.Toast;
 
 import com.example.mobilniproekt.room.DatabseController;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseNetworkException;
@@ -34,6 +36,7 @@ public class SignUpActivity extends AppCompatActivity {
     private TextInputLayout passwordLayout;
     private TextInputLayout rePasswordLayout;
     private FirebaseAuth mAuth;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -50,6 +53,14 @@ public class SignUpActivity extends AppCompatActivity {
         rePasswordLayout = findViewById(R.id.rePasswordSignUpInfoErrorLayout);
 
         mAuth = FirebaseAuth.getInstance();
+
+        mAdView = findViewById(R.id.adViewSignUp);
+
+        //test : ca-app-pub-3940256099942544/6300978111
+        //my : ca-app-pub-2112536401499963/1376229189
+        //mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
         signUpButton.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -25,6 +25,10 @@ import com.facebook.FacebookException;
 import com.facebook.FacebookSdk;
 import com.facebook.login.LoginManager;
 import com.facebook.login.LoginResult;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthCredential;
@@ -48,6 +52,7 @@ public class SignInOptionsActivity extends AppCompatActivity {
     public CallbackManager mCallbackManager;
     public LinearLayout signInWithFacebook;
     public FirebaseAuth mAuth;
+    private AdView mAdView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -69,6 +74,16 @@ public class SignInOptionsActivity extends AppCompatActivity {
 
         mAuth = FirebaseAuth.getInstance();
         mCallbackManager = CallbackManager.Factory.create();
+
+
+
+        mAdView = findViewById(R.id.adView);
+
+        //test : ca-app-pub-3940256099942544/6300978111
+        //my : ca-app-pub-2112536401499963/1376229189
+        //mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
 
 
         //to sign in with mail activity

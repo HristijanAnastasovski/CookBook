@@ -72,24 +72,18 @@
         app:layout_constraintBottom_toTopOf="@+id/SignInWithMailGuideline2"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/SignInWithMailGuideline1"
+        app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/cookbook_signup_logo" />
 
 
-    <android.support.constraint.Guideline
-        android:id="@+id/SignInWithMailGuideline1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.10"
-        app:layout_constraintGuide_begin="20dp" />
+
 
     <android.support.constraint.Guideline
         android:id="@+id/SignInWithMailGuideline2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.35"
+        app:layout_constraintGuide_percent="0.25"
         app:layout_constraintGuide_begin="20dp" />
 
     <android.support.constraint.Guideline
@@ -97,7 +91,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.55"
+        app:layout_constraintGuide_percent="0.45"
         app:layout_constraintGuide_begin="20dp" />
 
     <android.support.constraint.Guideline
@@ -105,7 +99,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.75"
+        app:layout_constraintGuide_percent="0.60"
         app:layout_constraintGuide_begin="20dp" />
 
     <android.support.constraint.Guideline
@@ -113,6 +107,23 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        app:layout_constraintGuide_percent="0.95"
+        app:layout_constraintGuide_percent="0.80"
         app:layout_constraintGuide_begin="20dp" />
+
+
+
+    <com.google.android.gms.ads.AdView
+        xmlns:ads="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/adViewMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        ads:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        ads:adSize="BANNER"
+        ads:adUnitId="ca-app-pub-3940256099942544/6300978111">
+
+    </com.google.android.gms.ads.AdView>
 </android.support.constraint.ConstraintLayout>
