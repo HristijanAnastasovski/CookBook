@@ -16,6 +16,9 @@ import android.widget.Button;
 import android.widget.Toast;
 
 import com.example.mobilniproekt.room.RecipeDatabase;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -28,6 +31,7 @@ public class MainMenuActivity extends AppCompatActivity {
     private static Semaphore semaphore=new Semaphore(0);
     private FirebaseAuth mAuth;
     private boolean userLoggedIn;
+
 
 
     @Override
@@ -77,7 +81,11 @@ public class MainMenuActivity extends AppCompatActivity {
             btnToExit.setText(R.string.main_menu_sign_out);
         }
 
-
+        /*
+        mInterstitialAd = new InterstitialAd(MainMenuActivity.this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+*/
 
 
 
@@ -144,10 +152,15 @@ public class MainMenuActivity extends AppCompatActivity {
         btnToAbout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 Intent intent=new Intent(getApplicationContext(), AboutUsActivity.class);
                 startActivity(intent);
             }
         });
+
+
+
+
     }
 
 

@@ -1,5 +1,6 @@
 package com.example.mobilniproekt;
 
+import android.app.ActivityManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -23,6 +24,8 @@ import android.widget.Toast;
 
 import com.example.mobilniproekt.adapters.IngredientsAdapter;
 import com.example.mobilniproekt.adapters.IngredientsSelectionAdapter;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEvent;
 import net.yslibrary.android.keyboardvisibilityevent.KeyboardVisibilityEventListener;
@@ -43,6 +46,7 @@ public class SearchActivity extends AppCompatActivity {
     private TextView currentlyEmptyText;
     private Button searchForRecipesButton;
     private BottomNavigationView navigation;
+    private InterstitialAd mInterstitialAd;
     private EmptyListBroadcastReceiver receiver=new EmptyListBroadcastReceiver();
 
 
@@ -60,6 +64,8 @@ public class SearchActivity extends AppCompatActivity {
 
         IntentFilter filter = new IntentFilter(LIST_EMPTY);
         this.registerReceiver(receiver,filter);
+
+
 
 
         KeyboardVisibilityEvent.setEventListener(
@@ -113,6 +119,7 @@ public class SearchActivity extends AppCompatActivity {
                         if(i+1<ingredients.size())
                         sb.append(",");
                     }
+
                     Intent intent=new Intent(SearchActivity.this, ListActivity.class);
                     intent.putExtra(SearchActivity.this.getString(R.string.queryString),sb.toString());
                     startActivity(intent);
@@ -204,4 +211,7 @@ public class SearchActivity extends AppCompatActivity {
             currentlyEmptyText.setVisibility(View.VISIBLE);
         }
     }
+
+
+
 }

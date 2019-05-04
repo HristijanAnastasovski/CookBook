@@ -6,111 +6,160 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewAbout1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="40dp"
-        android:text="About the purpose of this application:"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/textViewAbout2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginEnd="8dp"
 
-        android:text="@string/appPurposeText"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAbout1" />
+ <ScrollView
+     android:id="@+id/scrollView2"
+     android:layout_width="0dp"
+     android:layout_height="0dp"
 
-    <TextView
-        android:id="@+id/textViewAbout3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="References:"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAbout2" />
+     android:layout_marginBottom="50dp"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintHorizontal_bias="1.0"
+     app:layout_constraintLeft_toLeftOf="parent"
+     app:layout_constraintRight_toRightOf="parent"
+     app:layout_constraintTop_toTopOf="parent"
+     >
 
-    <TextView
-        android:id="@+id/textViewAbout4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/references"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAbout3" />
+  <android.support.constraint.ConstraintLayout
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      app:layout_constraintLeft_toLeftOf="parent"
+      app:layout_constraintRight_toRightOf="parent">
 
-    <TextView
-        android:id="@+id/textViewAbout5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="Developed by:"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAbout4" />
+   <TextView
+       android:id="@+id/textViewAbout1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="8dp"
+       android:layout_marginTop="40dp"
+       android:text="About the purpose of this application:"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toTopOf="parent"
+       android:textSize="20sp"/>
 
-    <TextView
-        android:id="@+id/textViewAbout6"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/developedBy"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAbout5" />
+   <TextView
+       android:id="@+id/textViewAbout2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginTop="30dp"
+       android:layout_marginStart="8dp"
+       android:layout_marginEnd="8dp"
 
-    <TextView
-        android:id="@+id/textViewAbout7"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="Contact &amp; Feedback:"
-        android:textSize="20sp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAbout6" />
+       android:text="@string/appPurposeText"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textViewAbout1" />
 
-    <TextView
-        android:id="@+id/textViewContact1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="30dp"
-        android:text="@string/contactHristijan"
-        android:clickable="true"
-        android:focusable="true"
-        android:textSize="15sp"
-    android:textColor="@color/design_default_color_primary"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewAbout7" />
+   <TextView
+       android:id="@+id/textViewAbout3"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="8dp"
+       android:layout_marginTop="30dp"
+       android:text="References:"
+       android:textSize="20sp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textViewAbout2" />
 
-    <TextView
-        android:id="@+id/textViewContact2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
-        android:text="@string/contactLjuben"
-        android:clickable="true"
-        android:focusable="true"
-        android:textSize="15sp"
-        android:textColor="@color/design_default_color_primary"
+   <TextView
+       android:id="@+id/textViewAbout4"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="8dp"
+       android:layout_marginTop="30dp"
+       android:text="@string/references"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textViewAbout3" />
 
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewContact1" />
+   <TextView
+       android:id="@+id/textViewAbout5"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="8dp"
+       android:layout_marginTop="30dp"
+       android:text="Developed by:"
+       android:textSize="20sp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textViewAbout4" />
+
+   <TextView
+       android:id="@+id/textViewAbout6"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="8dp"
+       android:layout_marginTop="30dp"
+       android:text="@string/developedBy"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textViewAbout5" />
+
+   <TextView
+       android:id="@+id/textViewAbout7"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="8dp"
+       android:layout_marginTop="30dp"
+       android:text="Contact &amp; Feedback:"
+       android:textSize="20sp"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textViewAbout6" />
+
+   <TextView
+       android:id="@+id/textViewContact1"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="8dp"
+       android:layout_marginTop="30dp"
+       android:text="@string/contactHristijan"
+       android:clickable="true"
+       android:focusable="true"
+       android:textSize="15sp"
+       android:textColor="@color/design_default_color_primary"
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textViewAbout7" />
+
+   <TextView
+       android:id="@+id/textViewContact2"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_marginStart="8dp"
+       android:layout_marginTop="10dp"
+       android:text="@string/contactLjuben"
+       android:clickable="true"
+       android:focusable="true"
+       android:textSize="15sp"
+       android:textColor="@color/design_default_color_primary"
+
+       app:layout_constraintStart_toStartOf="parent"
+       app:layout_constraintTop_toBottomOf="@+id/textViewContact1" />
+
+
+
+
+  </android.support.constraint.ConstraintLayout>
+ </ScrollView>
+
+ <android.support.design.widget.BottomNavigationView
+
+     android:id="@+id/bottomNav"
+     android:layout_width="match_parent"
+     android:layout_height="50dp"
+     android:layout_gravity="bottom"
+     android:layout_marginTop="10dp"
+     app:layout_constraintBottom_toBottomOf="parent"
+     app:layout_constraintHorizontal_bias="0.0"
+     app:layout_constraintLeft_toLeftOf="parent"
+     app:layout_constraintRight_toRightOf="parent"
+     app:menu="@menu/bottom_navigation_menu"
+     android:background="#1aa260"
+     app:itemTextColor="@color/whiteHeart"
+     app:itemIconTint="@color/whiteHeart"
+
+     />
+
 
 
 </android.support.constraint.ConstraintLayout>
+
+
+

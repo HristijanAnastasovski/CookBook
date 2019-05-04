@@ -27,6 +27,9 @@ import com.example.mobilniproekt.model.Recipes;
 import com.example.mobilniproekt.retrofit.GetDataService;
 import com.example.mobilniproekt.retrofit.RetrofitClientInstance;
 import com.example.mobilniproekt.room.RecipeDatabase;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 
 import org.w3c.dom.Text;
 
@@ -48,10 +51,11 @@ public class ListActivity extends AppCompatActivity {
     private RecyclerView recyclerView;
     private CardViewAdapter cardViewAdapter;
     private LinearLayoutManager linearLayoutManager;
-
     private RecipeDatabase recipeDatabase;
 
     ProgressDialog progressDialog;
+
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,7 +69,16 @@ public class ListActivity extends AppCompatActivity {
 
         Bundle bundle = getIntent().getExtras();
         String message = bundle.getString(ListActivity.this.getString(R.string.queryString));
+
+        //my id: ca-app-pub-2112536401499963/8150000023
+        //test id:ca-app-pub-3940256099942544/1033173712
+
+
+       // checkAd();
+
         getRecipes(message);
+
+
 
 
     }
@@ -184,5 +197,20 @@ public class ListActivity extends AppCompatActivity {
                     haveConnectedMobile = true;
         }
         return haveConnectedWifi || haveConnectedMobile;
+    }
+
+    public void checkAd(){
+        if(AdGlobal.clicksToAd<=0)
+        {
+            mInterstitialAd.loadAd(new AdRequest.Builder().build());
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
+            AdGlobal.clicksToAd=3;
+            //Toast.makeText(ListActivity.this,"Ad",Toast.LENGTH_LONG).show();
+        }else
+        {
+            AdGlobal.clicksToAd--;
+        }
     }
 }

@@ -17,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.drawable.DrawableTransitionOptions;
@@ -27,6 +28,9 @@ import com.example.mobilniproekt.room.DatabseController;
 import com.example.mobilniproekt.room.MappingModel;
 import com.example.mobilniproekt.room.RecipeDatabase;
 import com.example.mobilniproekt.room.RecipeModel;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -59,6 +63,8 @@ public class RecipeDetailsOfflineActivity extends AppCompatActivity {
     private Intent mainIntent;
 
     public static Semaphore semaphore=new Semaphore(0);
+
+    private InterstitialAd mInterstitialAd;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -134,6 +140,18 @@ public class RecipeDetailsOfflineActivity extends AppCompatActivity {
                 alert.show();
             }
         });
+
+        mInterstitialAd = new InterstitialAd(RecipeDetailsOfflineActivity.this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+                                          @Override
+                                          public void onAdLoaded() {
+                                              checkAd();
+                                          }
+                                      });
+       // Toast.makeText(RecipeDetailsOfflineActivity.this, "Details", Toast.LENGTH_SHORT).show();
     }
 
     @Override
@@ -193,5 +211,23 @@ public class RecipeDetailsOfflineActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void checkAd()
+    {
+        //Toast.makeText(RecipeDetailsOfflineActivity.this,String.valueOf(AdGlobal.clicksToAd), Toast.LENGTH_SHORT).show();
+        if(AdGlobal.clicksToAd<=0)
+        {
+            //ad
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
+
+            AdGlobal.clicksToAd=2;
+
+        }else
+        {
+            AdGlobal.clicksToAd--;
+        }
     }
 }

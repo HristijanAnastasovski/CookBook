@@ -104,7 +104,7 @@ public class SignInOptionsActivity extends AppCompatActivity {
         signInWithFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginManager.getInstance().logInWithReadPermissions(SignInOptionsActivity.this, Arrays.asList("email","public_profile"));
+                LoginManager.getInstance().logInWithReadPermissions(SignInOptionsActivity.this, Arrays.asList("email","public_profile","user_friends"));
                 LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
@@ -120,12 +120,15 @@ public class SignInOptionsActivity extends AppCompatActivity {
 
                     @Override
                     public void onError(FacebookException error) {
+                        Log.e("Error facebook auth:", error.toString());
                         if(error.toString().equals("CONNECTION_FAILURE: CONNECTION_FAILURE"))
                             Toast.makeText(SignInOptionsActivity.this, "Internet connection problem.",
                                     Toast.LENGTH_SHORT).show();
                         else
                         Toast.makeText(SignInOptionsActivity.this, "Authentication error.",
                                 Toast.LENGTH_SHORT).show();
+
+
                     }
                 });
             }

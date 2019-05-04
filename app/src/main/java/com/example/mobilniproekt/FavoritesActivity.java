@@ -17,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.mobilniproekt.adapters.FavoritesAdapter;
 import com.example.mobilniproekt.model.RecipeDetails;
@@ -75,6 +76,14 @@ public class FavoritesActivity extends AppCompatActivity {
             noFavoritesText.setVisibility(View.VISIBLE);
         }
 
+        //Toast.makeText(FavoritesActivity.this, "Favorites", Toast.LENGTH_SHORT).show();
+
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        //Toast.makeText(FavoritesActivity.this, "Start", Toast.LENGTH_SHORT).show();
     }
 
     private void initRecyclerView(){

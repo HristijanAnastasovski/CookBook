@@ -39,6 +39,9 @@ import com.example.mobilniproekt.room.DatabseController;
 import com.example.mobilniproekt.room.MappingModel;
 import com.example.mobilniproekt.room.RecipeDatabase;
 import com.example.mobilniproekt.room.RecipeModel;
+import com.google.android.gms.ads.AdListener;
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.InterstitialAd;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
@@ -79,6 +82,8 @@ public class RecipeDetailsActivity extends AppCompatActivity {
     private Toolbar toolbar;
     private MenuItem btnFavorites=null;
 
+    private InterstitialAd mInterstitialAd;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -95,11 +100,28 @@ public class RecipeDetailsActivity extends AppCompatActivity {
         toolbar = (Toolbar) findViewById(R.id.tool_bar);
         firebaseAuth=FirebaseAuth.getInstance();
 
-
+        //my id: ca-app-pub-2112536401499963/8150000023
+        //test id:ca-app-pub-3940256099942544/1033173712
         listInit();
+
+        mInterstitialAd = new InterstitialAd(RecipeDetailsActivity.this);
+        mInterstitialAd.setAdUnitId("ca-app-pub-3940256099942544/1033173712");
+        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+
+        mInterstitialAd.setAdListener(new AdListener() {
+            @Override
+            public void onAdLoaded() {
+                checkAd();
+            }
+        });
+
+
         //getDetailsData(id);
 
+
+
         database=new DatabseController(getApplicationContext());
+
     }
 
     @Override
@@ -255,5 +277,23 @@ public class RecipeDetailsActivity extends AppCompatActivity {
                 return false;
             }
         });
+    }
+
+    public void checkAd()
+    {
+        //Toast.makeText(RecipeDetailsOfflineActivity.this,String.valueOf(AdGlobal.clicksToAd), Toast.LENGTH_SHORT).show();
+        if(AdGlobal.clicksToAd<=0)
+        {
+            //ad
+            if (mInterstitialAd.isLoaded()) {
+                mInterstitialAd.show();
+            }
+
+            AdGlobal.clicksToAd=2;
+
+        }else
+        {
+            AdGlobal.clicksToAd--;
+        }
     }
 }
