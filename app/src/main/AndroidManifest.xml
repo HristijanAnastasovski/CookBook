@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.mobilniproekt">
+    package="com.finki.mobilniproekt">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
@@ -16,21 +16,21 @@
         android:usesCleartextTraffic="true"
         android:hardwareAccelerated="true"
         android:largeHeap="true"
-        android:name=".AdGlobal">
+        android:name="com.finki.mobilniproekt.AdGlobal">
 
-        <activity android:name=".ListActivity"></activity>
-        <activity android:name=".RecipeDetailsActivity"></activity>
-        <activity android:name=".MainMenuActivity" android:screenOrientation="portrait">
+        <activity android:name="com.finki.mobilniproekt.ListActivity"/>
+        <activity android:name="com.finki.mobilniproekt.RecipeDetailsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.finki.mobilniproekt.MainMenuActivity" android:screenOrientation="portrait">
 
         </activity>
 
-        <activity android:name=".RecipeDetailsOfflineActivity"/>
-        <activity android:name=".FavoritesActivity" />
-        <activity android:name=".AboutUsActivity"  />
+        <activity android:name="com.finki.mobilniproekt.RecipeDetailsOfflineActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.finki.mobilniproekt.FavoritesActivity" />
+        <activity android:name="com.finki.mobilniproekt.AboutUsActivity"  />
 
-        <activity android:name=".SearchActivity"  android:windowSoftInputMode="adjustResize" />
+        <activity android:name="com.finki.mobilniproekt.SearchActivity"  android:windowSoftInputMode="adjustResize" />
 
-        <activity android:name=".SplashScreenActivity" android:screenOrientation="portrait">
+        <activity android:name="com.finki.mobilniproekt.SplashScreenActivity" android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -38,9 +38,9 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".SignInOptionsActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".SignUpActivity" android:screenOrientation="portrait"/>
-        <activity android:name=".SignInWithMailActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.finki.mobilniproekt.SignInOptionsActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.finki.mobilniproekt.SignUpActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.finki.mobilniproekt.SignInWithMailActivity" android:screenOrientation="portrait"/>
 
 
         <meta-data android:name="com.facebook.sdk.ApplicationId"

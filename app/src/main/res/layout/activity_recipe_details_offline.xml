@@ -8,6 +8,17 @@ android:layout_height="match_parent"
 tools:context=".RecipeDetailsOfflineActivity">
 
 
+    <ImageView
+        android:id="@+id/detailsImageOffline"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
 
     <ScrollView
         android:id="@+id/scrollView2"
@@ -19,7 +30,7 @@ tools:context=".RecipeDetailsOfflineActivity">
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/detailsImageOffline"
         >
 
         <android.support.constraint.ConstraintLayout
@@ -28,17 +39,7 @@ tools:context=".RecipeDetailsOfflineActivity">
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent">
 
-            <ImageView
-                android:id="@+id/detailsImageOffline"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:scaleType="centerCrop"
-                android:src="@drawable/ic_launcher_background"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
 
-
-                />
 
             <TextView
                 android:id="@+id/ingredientsTextViewTagOffline"
@@ -50,7 +51,7 @@ tools:context=".RecipeDetailsOfflineActivity">
 
 
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/detailsImageOffline" />
+                app:layout_constraintBottom_toTopOf="@+id/recyclerViewIngredientsOffline"/>
 
             <android.support.v7.widget.RecyclerView
                 android:id="@+id/recyclerViewIngredientsOffline"

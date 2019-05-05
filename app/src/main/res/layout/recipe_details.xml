@@ -5,14 +5,27 @@ xmlns:tools="http://schemas.android.com/tools"
 android:layout_width="match_parent"
 android:layout_height="match_parent">
 
-
     <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/tool_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/scrollView2" />
+        app:layout_constraintTop_toTopOf="@+id/detailsImage" />
 
+
+
+    <ImageView
+
+        android:id="@+id/detailsImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_launcher_background"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+
+        />
 
 <ScrollView
     android:id="@+id/scrollView2"
@@ -24,7 +37,7 @@ android:layout_height="match_parent">
     app:layout_constraintHorizontal_bias="1.0"
     app:layout_constraintLeft_toLeftOf="parent"
     app:layout_constraintRight_toRightOf="parent"
-    app:layout_constraintTop_toTopOf="parent"
+    app:layout_constraintTop_toBottomOf="@id/detailsImage"
     >
 
 
@@ -38,18 +51,7 @@ android:layout_height="match_parent">
 
 
 
-        <ImageView
 
-            android:id="@+id/detailsImage"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:scaleType="centerCrop"
-            android:src="@drawable/ic_launcher_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-
-
-            />
 
         <TextView
             android:id="@+id/ingredientsTextViewTag"
@@ -61,7 +63,7 @@ android:layout_height="match_parent">
 
 
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/detailsImage"
+            app:layout_constraintTop_toTopOf="parent"
             />
 
         <android.support.v7.widget.RecyclerView
