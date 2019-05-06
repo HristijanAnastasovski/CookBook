@@ -75,8 +75,8 @@ public class SignInOptionsActivity extends AppCompatActivity {
         //test : ca-app-pub-3940256099942544/6300978111
         //my : ca-app-pub-2112536401499963/1376229189
         //mAdView.setAdUnitId("ca-app-pub-3940256099942544/6300978111");
-        AdRequest adRequest = new AdRequest.Builder().build();
-        mAdView.loadAd(adRequest);
+       AdRequest adRequest = new AdRequest.Builder().build();
+       mAdView.loadAd(adRequest);
 
 
         //to sign in with mail activity
@@ -112,7 +112,8 @@ public class SignInOptionsActivity extends AppCompatActivity {
         signInWithFacebook.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                LoginManager.getInstance().logInWithReadPermissions(SignInOptionsActivity.this, Arrays.asList("email","public_profile","user_friends"));
+                //LoginManager.getInstance().logOut();
+                LoginManager.getInstance().logInWithReadPermissions(SignInOptionsActivity.this, Arrays.asList("email"));
                 LoginManager.getInstance().registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
                     @Override
                     public void onSuccess(LoginResult loginResult) {
